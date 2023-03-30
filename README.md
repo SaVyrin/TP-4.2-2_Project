@@ -15,4 +15,4 @@
 - [Техническое задание.pdf](https://github.com/SaVyrin/TP-4.2-2_Project/blob/main/Документация/ТЗ%20Мои%20ИПУ.pdf)
 - [Курсовая работа.docx](https://github.com/SaVyrin/TP-4.2-2_Project/blob/main/Документация/Курсовая%20работа.docx)
 - [Курсовая работа.pdf](https://github.com/SaVyrin/TP-4.2-2_Project/blob/main/Документация/Курсовая%20работа.pdf)
-
+- [Презентация ТЗ](https://docs.google.com/presentation/d/1POKBrI35Oqe0zNZTVWDHLonTr2zM5QHpYX3OPz8PKY4/edit?usp=sharing)
