@@ -42,6 +42,7 @@ dependencies {
                     "datalist-limit-offset",
                     "datalist-page-count",
                     "recycler-extension",
+                    "recycler-decorator",
                     "rx-extension",
                     "shared-pref",
                     "util-ktx",
