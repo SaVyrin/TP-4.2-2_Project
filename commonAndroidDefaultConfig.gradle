@@ -1,0 +1,35 @@
+// Основная конфигурация для Android
+
+apply from: '../config.gradle'
+
+android {
+    compileSdkVersion meta.compileSdkVersion
+    buildToolsVersion versions.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion meta.minSdkVersion
+        targetSdkVersion meta.targetSdkVersion
+
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+}
+
+task printTestInstrumentationRunnerName {
+    doLast {
+        println "$android.defaultConfig.testInstrumentationRunner"
+    }
+}

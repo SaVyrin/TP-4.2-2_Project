@@ -1,0 +1,14 @@
+apply from: '../commonModule.gradle'
+
+dependencies {
+    gradle.ext.androidStandard.api(
+            this,
+            [
+                    "activity-holder",
+                    "rx-extension",
+                    "message-controller"
+            ]
+    )
+
+    implementation retrofit.core
+}

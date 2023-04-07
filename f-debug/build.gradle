@@ -1,0 +1,31 @@
+apply from: '../commonModule.gradle'
+apply from: '../commonKaptModule.gradle'
+
+
+dependencies {
+    gradle.ext.androidStandard.api(
+            this,
+            ["message-controller"]
+    )
+
+    implementation project(":base")
+    implementation project(":i-push-notification")
+    implementation project(":i-network")
+
+    implementation rxBinding2.core
+
+    implementation debug.processPhoenix
+    implementation debug.androidDebugTools
+
+    implementation network.chucker
+
+    implementation debug.tinyDancer
+    implementation debug.leakCanary
+
+    implementation stetho.core
+    implementation stetho.okHttp
+
+    implementation androidX.constraintLayout
+
+    api project(":domain")
+}
