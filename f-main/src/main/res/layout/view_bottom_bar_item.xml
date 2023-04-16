@@ -36,7 +36,7 @@
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:minWidth="18dp"
-            android:textAppearance="@style/Text.Regular.12.PrimaryColor"
+            android:textAppearance="@style/Text.Regular.12"
             android:visibility="gone"
             tools:text="10"
             tools:visibility="visible" />
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:gravity="center_horizontal"
-        android:textAppearance="@style/Text.Regular.12.SecondaryColor"
+        android:textAppearance="@style/Text.Regular.12"
         tools:text="Платежи" />
 
 </merge>

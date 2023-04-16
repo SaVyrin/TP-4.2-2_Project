@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAppearance="@style/Text.Regular.14.TertiaryColor"
+        android:textAppearance="@style/Text.Regular.14"
         tools:text="@string/state_empty_text" />
 
 </FrameLayout>

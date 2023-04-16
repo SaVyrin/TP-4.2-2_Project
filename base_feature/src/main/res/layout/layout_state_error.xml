@@ -10,7 +10,7 @@
         android:id="@+id/error_load_state_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Text.Regular.14.TertiaryColor"
+        android:textAppearance="@style/Text.Regular.14"
         tools:text="@string/state_error_message" />
 
     <Button

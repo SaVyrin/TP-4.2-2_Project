@@ -18,7 +18,7 @@
         <item name="boxStrokeErrorColor">@color/red</item>
         <item name="errorTextAppearance">@style/Text.Regular.12</item>
 
-        <item name="hintTextAppearance">@style/Text.Medium.12</item>
+        <item name="hintTextAppearance">@style/Text.Regular.12</item>
         <item name="hintTextColor">@color/gray</item>
         <item name="android:textColorHint">@color/gray</item>
 
@@ -37,7 +37,7 @@
         <item name="boxStrokeErrorColor">@color/red</item>
         <item name="errorTextAppearance">@style/Text.Regular.12</item>
 
-        <item name="hintTextAppearance">@style/Text.Medium.12</item>
+        <item name="hintTextAppearance">@style/Text.Regular.12</item>
         <item name="hintTextColor">@color/gray</item>
         <item name="android:textColorHint">@color/gray</item>
 
