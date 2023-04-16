@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Button">
+        <item name="backgroundTint">@color/blue</item>
+        <item name="rippleColor">@color/lines</item>
+        <item name="android:textAppearance">@style/Text.Bold.14</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="textAllCaps">false</item>
+        <item name="shapeAppearanceOverlay">@style/ButtonShapeAppearance</item>
+    </style>
+
+    <style name="ButtonShapeAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+</resources>

@@ -1,9 +1,9 @@
 ext {
     //todo инструкция инициализации https://jirasurf.atlassian.net/wiki/spaces/ANDDEP/pages/1307901989
-    applicationName = "AndroidStandard"
+    applicationName = "MyIPU"
 
     app = [
-            applicationId: "ru.surfstudio.android.template",
+            applicationId: "ru.surfstudio.android.myipu",
             versionName  : "0.0.1",
             versionCode  : 1
     ]

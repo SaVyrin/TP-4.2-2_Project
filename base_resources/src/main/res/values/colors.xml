@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/white</color>
+    <color name="colorPrimaryDark">@color/black</color>
+    <color name="colorAccent">@color/blue</color>
 
-    <color name="colorWindowBackgroundDark">#000</color>
-    <color name="colorWindowBackgroundDarkTransparent">#3c000000</color>
-    <color name="colorWindowBackgroundLight">#fff</color>
-    <color name="colorWindowBackgroundLightTransparent">#3cffffff</color>
+    <color name="colorWindowBackgroundDark">@color/white</color>
+    <color name="colorWindowBackgroundDarkTransparent">@color/white</color>
+    <color name="colorWindowBackgroundLight">@color/white</color>
+    <color name="colorWindowBackgroundLightTransparent">@color/white</color>
 
-    <color name="error_color_snackbar">#d32f2f</color>
+    <color name="error_color_snackbar">@color/red</color>
+    <color name="lines">@color/black_12</color>
 </resources>
