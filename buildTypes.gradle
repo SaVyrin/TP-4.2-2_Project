@@ -12,7 +12,7 @@ android {
             minifyEnabled false
             debuggable = true
             applicationIdSuffix meta.debugVersionNameSuffix
-            resValue "string", "app_name", "Template Debug" //todo fix debug app name
+            resValue "string", "app_name", "Мои ИПУ Debug" //todo fix debug app name
         }
         qa {
             signingConfig signingConfigs.test
@@ -22,7 +22,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), '../proguard-rules.pro'
             // сопоставлеие buildType.qa к buildType.release для корректного подключения локального android-standard
             matchingFallbacks = ['release']
-            resValue "string", "app_name", "Template QA" //todo fix qa app name
+            resValue "string", "app_name", "Мои ИПУ QA" //todo fix qa app name
 
             /* todo uncoment for real app
             firebaseAppDistribution {
