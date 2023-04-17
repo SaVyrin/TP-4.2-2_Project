@@ -4,7 +4,7 @@
     <style name="Button">
         <item name="backgroundTint">@color/blue</item>
         <item name="rippleColor">@color/lines</item>
-        <item name="android:textAppearance">@style/Text.Bold.14</item>
+        <item name="android:textAppearance">@style/Text.Bold.16</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="textAllCaps">false</item>
         <item name="shapeAppearanceOverlay">@style/ButtonShapeAppearance</item>

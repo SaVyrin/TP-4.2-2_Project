@@ -24,4 +24,10 @@
 
     <string name="onboarding_remind_later_btn">Напомнить позже</string>
     <string name="onboarding_hide_btn">Скрыть</string>
+
+    <!-- Authorization -->
+    <string name="auth_title_text">Вход</string>
+    <string name="auth_login_text">Логин</string>
+    <string name="auth_password_text">Пароль</string>
+    <string name="auth_btn_text">Войти</string>
 </resources>

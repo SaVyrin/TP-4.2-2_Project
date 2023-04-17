@@ -18,6 +18,10 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="Text.Regular.18">
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="Text.Bold">
         <item name="android:fontFamily">@font/roboto_bold</item>
     </style>
@@ -36,6 +40,10 @@
 
     <style name="Text.Bold.18">
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Text.Bold.32">
+        <item name="android:textSize">32sp</item>
     </style>
 
 </resources>
