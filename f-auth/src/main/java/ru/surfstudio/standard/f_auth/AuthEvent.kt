@@ -10,4 +10,8 @@ internal sealed class AuthEvent : Event {
 
     data class Navigation(override var event: NavCommandsEvent = NavCommandsEvent()) : NavCommandsComposition, AuthEvent()
     data class Lifecycle(override var stage: LifecycleStage) : AuthEvent(), LifecycleEvent
+
+    sealed class Input : AuthEvent() {
+        object AuthClicked : Input()
+    }
 }
