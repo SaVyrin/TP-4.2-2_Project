@@ -34,9 +34,9 @@ internal class MainBarMiddleware @Inject constructor(
 
     private fun openSelectedTab(event: TabSelected): MainBarEvent {
         val tabRoute: FragmentRoute = when (event.tabType) {
-            FEED -> MetricsFragmentRoute()
+            METRICS -> MetricsFragmentRoute()
             PROFILE -> ProfileFragmentRoute()
-            SEARCH -> PayFragmentRoute()
+            PAY -> PayFragmentRoute()
         }
         return Navigation().builder()
             .replace(tabRoute)

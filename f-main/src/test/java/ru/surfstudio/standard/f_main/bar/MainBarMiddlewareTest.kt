@@ -11,9 +11,9 @@ import ru.surfstudio.standard.base.test.util.forAll
 import ru.surfstudio.standard.f_main.bar.MainBarEvent.TabSelected
 import ru.surfstudio.standard.ui.navigation.routes.MetricsFragmentRoute
 import ru.surfstudio.standard.ui.navigation.routes.MainTabType
-import ru.surfstudio.standard.ui.navigation.routes.MainTabType.FEED
+import ru.surfstudio.standard.ui.navigation.routes.MainTabType.METRICS
 import ru.surfstudio.standard.ui.navigation.routes.MainTabType.PROFILE
-import ru.surfstudio.standard.ui.navigation.routes.MainTabType.SEARCH
+import ru.surfstudio.standard.ui.navigation.routes.MainTabType.PAY
 import ru.surfstudio.standard.ui.navigation.routes.ProfileFragmentRoute
 import ru.surfstudio.standard.ui.navigation.routes.PayFragmentRoute
 import ru.surfstudio.standard.ui.test.base.BaseMiddlewareTest
@@ -26,9 +26,9 @@ internal class MainBarMiddlewareTest : BaseMiddlewareTest() {
 
     @Test
     fun `when tab of given type selected, corresponding tab screen should be opened`() = forAll(
-        FEED to MetricsFragmentRoute::class,
+        METRICS to MetricsFragmentRoute::class,
         PROFILE to ProfileFragmentRoute::class,
-        SEARCH to PayFragmentRoute::class
+        PAY to PayFragmentRoute::class
     ) { tabType: MainTabType, routeClass: KClass<out TabHeadRoute> ->
         val middleware = createMiddleware()
         val inputEvent = TabSelected(tabType)

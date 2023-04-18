@@ -7,7 +7,7 @@ import java.io.Serializable
  * TODO переименовать табы и добавить свои при необходимости
  */
 enum class MainTabType: Serializable {
-    FEED, // экран ленты
-    SEARCH, // экран поиска
+    METRICS, // экран передачи показаний
+    PAY, // экран оплаты услуг
     PROFILE // экран профиля пользователя
 }
