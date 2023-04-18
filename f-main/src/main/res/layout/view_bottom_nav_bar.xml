@@ -14,7 +14,7 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             app:item_icon="@drawable/ic_android"
-            app:item_labelText="@string/bottom_bar_feed" />
+            app:item_labelText="@string/bottom_bar_metrics" />
 
         <ru.surfstudio.standard.f_main.view.BottomBarItemView
             android:id="@+id/bottom_bar_search_btn"
@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             app:item_icon="@drawable/ic_android"
-            app:item_labelText="@string/bottom_bar_search" />
+            app:item_labelText="@string/bottom_bar_pay" />
 
         <ru.surfstudio.standard.f_main.view.BottomBarItemView
             android:id="@+id/bottom_bar_profile_btn"
