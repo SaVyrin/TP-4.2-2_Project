@@ -49,6 +49,10 @@
 
     <!-- Profile -->
     <string name="profile_title_text">Личный кабинет</string>
+    <string name="profile_licevoi_schet_text">Лицевой счёт</string>
+    <string name="profile_name_text">Имя</string>
+    <string name="profile_surname_text">Фамилия</string>
+    <string name="profile_address_text">Адрес</string>
     <string name="profile_logout_btn">Выйти</string>
 
 </resources>

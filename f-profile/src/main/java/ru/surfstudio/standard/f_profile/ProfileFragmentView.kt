@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.surfstudio.android.core.mvi.impls.event.hub.ScreenEventHub
 import ru.surfstudio.android.core.ui.navigation.feature.route.feature.CrossFeatureFragment
 import ru.surfstudio.android.core.ui.view_binding.viewBinding
+import ru.surfstudio.android.easyadapter.EasyAdapter
+import ru.surfstudio.standard.f_profile.controller.UserInfoController
 import ru.surfstudio.standard.f_profile.databinding.FragmentProfileBinding
 import ru.surfstudio.standard.f_profile.di.ProfileScreenConfigurator
 import ru.surfstudio.standard.ui.mvi.view.BaseMviFragmentView
@@ -26,6 +29,9 @@ internal class ProfileFragmentView : BaseMviFragmentView<ProfileState, ProfileEv
 
     private val binding by viewBinding(FragmentProfileBinding::bind)
 
+    private val easyAdapter = EasyAdapter()
+    private val userInfoController = UserInfoController()
+
     override fun createConfigurator() = ProfileScreenConfigurator(arguments)
 
     override fun onCreateView(
@@ -37,10 +43,19 @@ internal class ProfileFragmentView : BaseMviFragmentView<ProfileState, ProfileEv
     }
 
     override fun initViews() {
-
+        with(binding) {
+            with(profileRv) {
+                adapter = easyAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+            }
+        }
     }
 
     override fun render(state: ProfileState) {
+        easyAdapter.setData(state.screenItems, userInfoController)
+    }
 
+    private fun buildDecoration() {
+        // TODO добавить decoration
     }
 }
