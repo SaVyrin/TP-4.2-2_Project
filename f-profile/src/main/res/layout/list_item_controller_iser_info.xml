@@ -3,23 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/user_info_title_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="@style/Text.Regular.14"
+        app:layout_constraintEnd_toStartOf="@id/user_info_value_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Имя" />
 
     <TextView
         android:id="@+id/user_info_value_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:textAppearance="@style/Text.Regular.14"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/user_info_title_tv"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Базовый Шлёпа Гигачад" />
 
@@ -28,6 +31,6 @@
         android:layout_height="1dp"
         android:layout_marginTop="3dp"
         android:background="@color/lines"
-        app:layout_constraintTop_toBottomOf="@id/user_info_title_tv" />
+        app:layout_constraintTop_toBottomOf="@id/user_info_value_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
