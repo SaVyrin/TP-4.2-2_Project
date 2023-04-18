@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.jakewharton.rxbinding2.view.clicks
 import ru.surfstudio.android.core.mvi.impls.event.hub.ScreenEventHub
 import ru.surfstudio.android.core.ui.navigation.feature.route.feature.CrossFeatureFragment
 import ru.surfstudio.android.core.ui.view_binding.viewBinding
@@ -39,12 +38,8 @@ internal class MetricsFragmentView : BaseMviFragmentView<MetricsState, MetricsEv
     }
 
     override fun render(state: MetricsState) {
-        if (state.message.isNotEmpty()) {
-            messageController.show(message = state.message)
-        }
     }
 
     override fun initViews() {
-        binding.feedBtn.clicks().emit(MetricsEvent.OpenDialog)
     }
 }
