@@ -128,7 +128,7 @@
         android:id="@+id/pay_next_period_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/pay_next_period_text"
         android:textAppearance="@style/Text.Regular.14"
         app:layout_constraintBottom_toTopOf="@id/pay_send_btn"
