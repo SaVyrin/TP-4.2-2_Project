@@ -17,9 +17,9 @@
     <string name="state_error_message">Произошла ошибка</string>
     <string name="state_error_btn">Обновить</string>
 
-    <!--  TODO переименовать табы в соответствии с проектом  -->
-    <string name="bottom_bar_feed">Новости</string>
-    <string name="bottom_bar_search">Поиск</string>
+    <!-- Bottom bar tabs -->
+    <string name="bottom_bar_metrics">Показания</string>
+    <string name="bottom_bar_pay">Оплата</string>
     <string name="bottom_bar_profile">Профиль</string>
 
     <string name="onboarding_remind_later_btn">Напомнить позже</string>

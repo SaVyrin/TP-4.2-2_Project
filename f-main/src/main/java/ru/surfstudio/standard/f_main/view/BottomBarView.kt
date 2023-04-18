@@ -4,9 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.LinearLayout
-import ru.surfstudio.android.template.f_main.R
 import ru.surfstudio.android.template.f_main.databinding.LayoutBottomBarBinding
 import ru.surfstudio.standard.ui.navigation.routes.MainTabType
 
@@ -25,8 +23,8 @@ class BottomBarView @JvmOverloads constructor(
 
     private val tabButtonsMap by lazy {
         hashMapOf(
-            MainTabType.FEED to binding.bottomBarFeedBtn,
-            MainTabType.SEARCH to binding.bottomBarSearchBtn,
+            MainTabType.METRICS to binding.bottomBarFeedBtn,
+            MainTabType.PAY to binding.bottomBarSearchBtn,
             MainTabType.PROFILE to binding.bottomBarProfileBtn
         )
     }
@@ -49,7 +47,7 @@ class BottomBarView @JvmOverloads constructor(
      *
      * @param selectedTabType тип выбранного таба
      */
-    fun updateSelection(selectedTabType: MainTabType = MainTabType.FEED) {
+    fun updateSelection(selectedTabType: MainTabType = MainTabType.METRICS) {
         for ((tabType, button) in tabButtonsMap) {
             button.setChecked(tabType == selectedTabType)
         }
