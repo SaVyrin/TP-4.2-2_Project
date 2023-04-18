@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jakewharton.rxbinding2.view.clicks
 import ru.surfstudio.android.core.mvi.impls.event.hub.ScreenEventHub
 import ru.surfstudio.android.core.ui.navigation.feature.route.feature.CrossFeatureFragment
 import ru.surfstudio.android.core.ui.view_binding.viewBinding
 import ru.surfstudio.android.template.f_auth.R
 import ru.surfstudio.android.template.f_auth.databinding.FragmentAuthBinding
+import ru.surfstudio.standard.f_auth.AuthEvent.*
 import ru.surfstudio.standard.f_auth.di.AuthScreenConfigurator
 import ru.surfstudio.standard.ui.mvi.view.BaseMviFragmentView
 import javax.inject.Inject
@@ -16,7 +18,8 @@ import javax.inject.Inject
 /**
  * Вью таба поиск
  */
-internal class AuthFragmentView : BaseMviFragmentView<AuthState, AuthEvent>(), CrossFeatureFragment {
+internal class AuthFragmentView : BaseMviFragmentView<AuthState, AuthEvent>(),
+    CrossFeatureFragment {
 
     @Inject
     override lateinit var hub: ScreenEventHub<AuthEvent>
@@ -40,5 +43,8 @@ internal class AuthFragmentView : BaseMviFragmentView<AuthState, AuthEvent>(), C
     }
 
     override fun initViews() {
+        with(binding) {
+            authBtn.clicks().emit(Input.AuthClicked)
+        }
     }
 }
