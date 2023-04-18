@@ -39,7 +39,7 @@
     <string name="metrics_previous_text">Пред. показания: %d</string>
 
     <!-- Metrics -->
-    <string name="pay_title_text">Передача показаний</string>
+    <string name="pay_title_text">Оплата услуг</string>
     <string name="pay_cold_water_text">Холодная вода</string>
     <string name="pay_hot_water_text">Горячая вода</string>
     <string name="pay_single_metric_text">К оплате: %dр.</string>
