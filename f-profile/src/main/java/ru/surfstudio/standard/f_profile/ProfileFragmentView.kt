@@ -9,11 +9,14 @@ import ru.surfstudio.android.core.mvi.impls.event.hub.ScreenEventHub
 import ru.surfstudio.android.core.ui.navigation.feature.route.feature.CrossFeatureFragment
 import ru.surfstudio.android.core.ui.view_binding.viewBinding
 import ru.surfstudio.android.easyadapter.EasyAdapter
+import ru.surfstudio.android.easyadapter.ItemList
 import ru.surfstudio.android.recycler.decorator.Decorator
 import ru.surfstudio.android.recycler.decorator.MasterDecorator
 import ru.surfstudio.standard.f_profile.controller.UserInfoController
+import ru.surfstudio.standard.f_profile.controller.UserStatisticsController
 import ru.surfstudio.standard.f_profile.databinding.FragmentProfileBinding
 import ru.surfstudio.standard.f_profile.di.ProfileScreenConfigurator
+import ru.surfstudio.standard.f_profile.ui.ProfileUi
 import ru.surfstudio.standard.ui.mvi.view.BaseMviFragmentView
 import ru.surfstudio.standard.ui.recylcer.SimpleDecor
 import ru.surfstudio.standard.ui.util.toPx
@@ -35,6 +38,7 @@ internal class ProfileFragmentView : BaseMviFragmentView<ProfileState, ProfileEv
 
     private val easyAdapter = EasyAdapter()
     private val userInfoController = UserInfoController()
+    private val userStatisticsController = UserStatisticsController()
 
     override fun createConfigurator() = ProfileScreenConfigurator(arguments)
 
@@ -47,17 +51,22 @@ internal class ProfileFragmentView : BaseMviFragmentView<ProfileState, ProfileEv
     }
 
     override fun initViews() {
-        with(binding) {
-            with(profileRv) {
-                adapter = easyAdapter
-                layoutManager = LinearLayoutManager(requireContext())
-                addItemDecoration(buildDecoration())
-            }
+        with(binding.profileRv) {
+            adapter = easyAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(buildDecoration())
         }
     }
 
     override fun render(state: ProfileState) {
-        easyAdapter.setData(state.screenItems, userInfoController)
+        ItemList().apply {
+            for (item in state.screenItems) {
+                when (item) {
+                    is ProfileUi.UserInfoUi -> add(item, userInfoController)
+                    is ProfileUi.UserStatisticsUi -> add(item, userStatisticsController)
+                }
+            }
+        }.also(easyAdapter::setItems)
     }
 
     private fun buildDecoration(): MasterDecorator {

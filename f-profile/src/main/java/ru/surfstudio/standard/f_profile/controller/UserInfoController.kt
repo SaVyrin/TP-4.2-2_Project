@@ -4,13 +4,13 @@ import android.view.ViewGroup
 import ru.surfstudio.android.easyadapter.controller.BindableItemController
 import ru.surfstudio.android.easyadapter.holder.BindableViewHolder
 import ru.surfstudio.standard.f_profile.R
-import ru.surfstudio.standard.f_profile.ui.UserInfoUi
-import ru.surfstudio.standard.f_profile.databinding.ListItemControllerIserInfoBinding
+import ru.surfstudio.standard.f_profile.databinding.ListItemControllerUserInfoBinding
+import ru.surfstudio.standard.f_profile.ui.ProfileUi.*
 
 /**
  * Контроллер информации о пользователе
  */
-class UserInfoController : BindableItemController<UserInfoUi, UserInfoController.Holder>() {
+class UserInfoController() : BindableItemController<UserInfoUi, UserInfoController.Holder>() {
 
     override fun getItemId(data: UserInfoUi): Any = data.title
 
@@ -18,9 +18,9 @@ class UserInfoController : BindableItemController<UserInfoUi, UserInfoController
 
     inner class Holder(
         parent: ViewGroup
-    ) : BindableViewHolder<UserInfoUi>(parent, R.layout.list_item_controller_iser_info) {
+    ) : BindableViewHolder<UserInfoUi>(parent, R.layout.list_item_controller_user_info) {
 
-        private val binding = ListItemControllerIserInfoBinding.bind(itemView)
+        private val binding = ListItemControllerUserInfoBinding.bind(itemView)
 
         override fun bind(data: UserInfoUi) {
             with(binding) {

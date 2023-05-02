@@ -13,12 +13,6 @@
         android:text="@string/profile_title_text"
         android:textAppearance="@style/Text.Bold.32" />
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/profile_pie_chart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/profile_rv"
         android:layout_width="match_parent"
