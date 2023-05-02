@@ -22,8 +22,12 @@
     <string name="bottom_bar_pay">Оплата</string>
     <string name="bottom_bar_profile">Профиль</string>
 
-    <string name="onboarding_remind_later_btn">Напомнить позже</string>
-    <string name="onboarding_hide_btn">Скрыть</string>
+    <!-- Onboarding -->
+    <string name="onboarding_metrics_title">Передать показания всех ИПУ можно в одном месте.</string>
+    <string name="onboarding_pay_title">Все жилищно-коммунальные услуги можно оплачивать в одном месте.</string>
+    <string name="onboarding_profile_title">В личном кабинете Вам будет доступна статистика потребления услуг, а также ваши клиентские данные.</string>
+    <string name="onboarding_next_btn">Далее</string>
+    <string name="onboarding_skip_btn">Пропустить</string>
 
     <!-- Authorization -->
     <string name="auth_title_text">Вход</string>
@@ -38,7 +42,7 @@
     <string name="metrics_send_btn">Передать показания</string>
     <string name="metrics_previous_text">Пред. показания: %d</string>
 
-    <!-- Metrics -->
+    <!-- Pay -->
     <string name="pay_title_text">Оплата услуг</string>
     <string name="pay_cold_water_text">Холодная вода</string>
     <string name="pay_hot_water_text">Горячая вода</string>
