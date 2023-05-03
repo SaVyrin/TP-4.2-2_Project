@@ -18,9 +18,35 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/onboarding_metrics_iv"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/metrics"
+        app:layout_constraintBottom_toTopOf="@id/onboarding_skip_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/onboarding_title" />
+
+    <ImageView
+        android:id="@+id/onboarding_pay_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/pay"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/onboarding_skip_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/onboarding_title" />
+
+    <ImageView
+        android:id="@+id/onboarding_profile_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
         android:src="@drawable/profile"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/onboarding_skip_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

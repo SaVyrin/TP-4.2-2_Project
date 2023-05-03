@@ -1,5 +1,6 @@
 package ru.surfstudio.standard.f_onboarding
 
+import androidx.core.view.isVisible
 import com.jakewharton.rxbinding2.view.clicks
 import ru.surfstudio.android.core.mvi.impls.event.hub.ScreenEventHub
 import ru.surfstudio.android.core.ui.navigation.feature.route.feature.CrossFeatureFragment
@@ -37,8 +38,20 @@ internal class OnboardingActivityView : BaseMviActivityView<OnboardingState, Onb
     }
 
     override fun render(state: OnboardingState) {
-        binding.onboardingTitle.performIfChanged(state.onboardingUi) { onboardingUi ->
-            setText(onboardingUi.textRes)
+        with(binding) {
+            onboardingTitle.performIfChanged(state.onboardingUi) { onboardingUi ->
+                setText(onboardingUi.textRes)
+            }
+
+            onboardingMetricsIv.performIfChanged(state.onboardingUi) { onboardingUi ->
+                isVisible = onboardingUi is OnboardingUi.Metrics
+            }
+            onboardingPayIv.performIfChanged(state.onboardingUi) { onboardingUi ->
+                isVisible = onboardingUi is OnboardingUi.Pay
+            }
+            onboardingProfileIv.performIfChanged(state.onboardingUi) { onboardingUi ->
+                isVisible = onboardingUi is OnboardingUi.Profile
+            }
         }
     }
 }

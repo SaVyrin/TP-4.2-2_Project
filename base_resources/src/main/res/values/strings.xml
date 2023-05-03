@@ -25,7 +25,7 @@
     <!-- Onboarding -->
     <string name="onboarding_metrics_title">Передать показания всех ИПУ можно в одном месте.</string>
     <string name="onboarding_pay_title">Все жилищно-коммунальные услуги можно оплачивать в одном месте.</string>
-    <string name="onboarding_profile_title">В личном кабинете Вам будет доступна статистика потребления услуг, а также ваши клиентские данные.</string>
+    <string name="onboarding_profile_title">В личном кабинете вам будет доступна статистика потребления услуг, а также ваши клиентские данные.</string>
     <string name="onboarding_next_btn">Далее</string>
     <string name="onboarding_skip_btn">Пропустить</string>
 
