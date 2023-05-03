@@ -5,8 +5,11 @@ import ru.surfstudio.android.core.mvi.impls.ui.reactor.BaseReactorDependency
 import ru.surfstudio.android.core.mvi.impls.ui.reducer.BaseReducer
 import ru.surfstudio.android.core.mvp.binding.rx.relation.mvp.State
 import ru.surfstudio.android.dagger.scope.PerScreen
+import ru.surfstudio.standard.f_onboarding.OnboardingEvent.*
 
-internal class OnboardingState
+internal data class OnboardingState(
+    val onboardingUi: OnboardingUi = OnboardingUi.Metrics
+)
 
 @PerScreen
 internal class OnboardingStateHolder @Inject constructor() :
@@ -18,8 +21,13 @@ internal class OnboardingReducer @Inject constructor(
 ) : BaseReducer<OnboardingEvent, OnboardingState>(dependency) {
 
     override fun reduce(state: OnboardingState, event: OnboardingEvent): OnboardingState {
-        //TODO расширить реализацию при создании приложения
-        return state
+        return when (event) {
+            is Input.NextBtnClicked -> handleNextBtnClicked(state)
+            else -> state
+        }
     }
 
+    private fun handleNextBtnClicked(state: OnboardingState): OnboardingState {
+        return state.copy(onboardingUi = state.onboardingUi.next)
+    }
 }

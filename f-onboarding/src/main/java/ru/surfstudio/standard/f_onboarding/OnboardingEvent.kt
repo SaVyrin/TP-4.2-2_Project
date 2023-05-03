@@ -13,6 +13,6 @@ internal sealed class OnboardingEvent : Event {
 
     sealed class Input : OnboardingEvent() {
         object SkipBtnClicked : Input()
-        object RemindLaterBtnClicked : Input()
+        object NextBtnClicked : Input()
     }
 }
