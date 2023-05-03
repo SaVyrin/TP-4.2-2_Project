@@ -63,14 +63,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/onboarding_skip_btn"
-        style="@style/Button"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_ripple"
+        android:backgroundTint="@color/transparent"
+        android:shadowColor="@color/transparent"
         android:text="@string/onboarding_skip_btn"
+        android:textAppearance="@style/Text.Bold.16"
+        android:textColor="@color/black_70"
+        app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
