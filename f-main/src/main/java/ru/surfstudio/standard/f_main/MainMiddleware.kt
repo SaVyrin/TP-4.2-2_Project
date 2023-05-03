@@ -7,7 +7,7 @@ import ru.surfstudio.android.dagger.scope.PerScreen
 import ru.surfstudio.standard.f_main.MainEvent.Navigation
 import ru.surfstudio.standard.ui.mvi.navigation.base.NavigationMiddleware
 import ru.surfstudio.standard.ui.mvi.navigation.extension.replace
-import ru.surfstudio.standard.ui.navigation.routes.MainBarRoute
+import ru.surfstudio.standard.ui.navigation.routes.AuthFragmentRoute
 import javax.inject.Inject
 
 @PerScreen
@@ -20,7 +20,7 @@ internal class MainMiddleware @Inject constructor(
         transformations(eventStream) {
             addAll(
                 Navigation::class decomposeTo navigationMiddleware,
-                onCreate() map { Navigation().replace(MainBarRoute()) }
+                onCreate() map { Navigation().replace(AuthFragmentRoute()) }
             )
         }
 }

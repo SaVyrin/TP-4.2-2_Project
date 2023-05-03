@@ -7,7 +7,7 @@ import ru.surfstudio.android.dagger.scope.PerScreen
 import ru.surfstudio.standard.f_auth.AuthEvent.*
 import ru.surfstudio.standard.ui.mvi.navigation.base.NavigationMiddleware
 import ru.surfstudio.standard.ui.mvi.navigation.extension.replace
-import ru.surfstudio.standard.ui.navigation.routes.MetricsFragmentRoute
+import ru.surfstudio.standard.ui.navigation.routes.MainBarRoute
 import javax.inject.Inject
 
 @PerScreen
@@ -25,6 +25,6 @@ internal class AuthMiddleware @Inject constructor(
         }
 
     private fun navigateToMetricsScreen(): Navigation {
-        return Navigation().replace(MetricsFragmentRoute())
+        return Navigation().replace(MainBarRoute())
     }
 }
