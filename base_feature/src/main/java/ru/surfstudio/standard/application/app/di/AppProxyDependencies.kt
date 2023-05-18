@@ -20,6 +20,7 @@ import ru.surfstudio.standard.i_initialization.InitializeAppInteractor
 import ru.surfstudio.standard.i_onboarding.OnBoardingStorage
 import ru.surfstudio.standard.i_push_notification.storage.FcmStorage
 import ru.surfstudio.standard.i_session.SessionChangedInteractor
+import ru.surfstudio.standard.i_user.UserStorage
 import ru.surfstudio.standard.ui.mvi.navigation.IntentChecker
 import javax.inject.Named
 
@@ -52,6 +53,7 @@ interface AppProxyDependencies {
     fun sharedPreferences(): SharedPreferences
 
     fun onBoardingStorage(): OnBoardingStorage
+    fun userStorage(): UserStorage
 
     fun authInteractor(): AuthInteractor
 }
