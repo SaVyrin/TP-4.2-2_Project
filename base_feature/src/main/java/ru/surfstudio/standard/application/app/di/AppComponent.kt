@@ -12,6 +12,7 @@ import ru.surfstudio.standard.application.notification.FcmModule
 import ru.surfstudio.standard.application.notification.MessagingService
 import ru.surfstudio.standard.application.notification.NotificationModule
 import ru.surfstudio.standard.application.storage.di.SharedPrefModule
+import ru.surfstudio.standard.application.user.di.UserModule
 import ru.surfstudio.standard.ui.navigation.di.NavigationModule
 
 @PerApplication
@@ -20,6 +21,7 @@ import ru.surfstudio.standard.ui.navigation.di.NavigationModule
     MigrationModule::class,
     SharedPrefModule::class,
     AuthModule::class,
+    UserModule::class,
     CacheModule::class,
     EtagModule::class,
     NetworkModule::class,

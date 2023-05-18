@@ -5,4 +5,9 @@ data class UserInfo(
     val name: String,
     val surname: String,
     val address: String
-)
+) {
+
+    companion object {
+        val EMPTY_USER = UserInfo(0, "", "", "")
+    }
+}
