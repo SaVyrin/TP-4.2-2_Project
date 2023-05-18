@@ -17,6 +17,7 @@ dependencies {
     implementation project(":i-onboarding")
     implementation project(":i-network")
     implementation project(":i-token")
+    implementation project(":i-user")
     implementation project(":i-initialization")
     implementation project(":i-session")
 

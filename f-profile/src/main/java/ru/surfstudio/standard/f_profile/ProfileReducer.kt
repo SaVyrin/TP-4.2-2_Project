@@ -46,12 +46,14 @@ internal class ProfileScreenStateHolder @Inject constructor(
  */
 @PerScreen
 internal class ProfileReducer @Inject constructor(
-    dependency: BaseReactorDependency
+    dependency: BaseReactorDependency,
+    private val userInfoUiCreator: UserInfoUiCreator
 ) : BaseReducer<ProfileEvent, ProfileState>(dependency) {
 
     override fun reduce(state: ProfileState, event: ProfileEvent): ProfileState {
         return when (event) {
             is Lifecycle -> handleGetStatistics(state, event)
+            is GotCurrentUser -> handleGotCurrentUser(state, event)
             else -> state
         }
     }
@@ -84,5 +86,10 @@ internal class ProfileReducer @Inject constructor(
             valueTextSize = 16.toPx.toFloat()
         }
         return PieData(pieDataSet)
+    }
+
+    private fun handleGotCurrentUser(state: ProfileState, event: GotCurrentUser): ProfileState {
+        val screenItems = userInfoUiCreator.createUserInfoItems(event.userInfo)
+        return state.copy(screenItems = screenItems)
     }
 }
