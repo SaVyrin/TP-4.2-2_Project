@@ -65,8 +65,8 @@ internal class MetricsFragmentView : BaseMviFragmentView<MetricsState, MetricsEv
     }
 
     private fun initCommands() {
-        ch.errorMessage bindTo { showMessage(it, R.color.colorAccent) }
-        ch.ipuSendSuccess bindTo ::showMessage
+        ch.errorMessage bindTo ::showMessage
+        ch.ipuSendSuccess bindTo { showMessage(it, R.color.colorAccent) }
     }
 
     private fun showMessage(message: String, colorRes: Int? = null) {

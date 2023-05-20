@@ -83,7 +83,7 @@ internal class MetricsReducer @Inject constructor(
         state: MetricsState,
         event: SendIpuRequestEvent
     ): MetricsState {
-        val request = RequestMapper.builder(event.request)
+        RequestMapper.builder(event.request)
             .handleError(RequestMappers.error.noInternet(errorHandler))
             .handleError { _, _, _ ->
                 val message = resourceProvider.getString(R.string.default_error_message)
@@ -92,11 +92,18 @@ internal class MetricsReducer @Inject constructor(
             }
             .build()
 
-        val isLoading = event.isLoading
         val isSuccess = event.isSuccess
         if (isSuccess) {
             val successMessage = resourceProvider.getString(R.string.metrics_send_success_text)
             ch.ipuSendSuccess.accept(successMessage)
+            val metricsItems = state.metricsUiItems.map {
+                val previousValue = resourceProvider.getString(
+                    R.string.metrics_previous_text,
+                    it.ipu.value
+                )
+                it.copy(previousValue = previousValue)
+            }
+            return state.copy(metricsUiItems = metricsItems)
         }
         return state
     }

@@ -38,10 +38,10 @@ internal class MetricsMiddleware @Inject constructor(
             .asRequestEvent { CurrentIpuRequestEvent(it) }
     }
 
-    private fun handleSendIpuClicked(): Observable<out SendIpuRequestEvent> {
+    private fun handleSendIpuClicked(): Observable<out MetricsEvent> {
         val ipu = state.metricsUiItems.map { it.ipu }
         return ipuInteractor.sendIpu(ipu)
             .io()
-            .asRequestEvent { SendIpuRequestEvent(it) }
+            .asRequestEvent(::SendIpuRequestEvent)
     }
 }
