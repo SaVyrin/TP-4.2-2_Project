@@ -5,16 +5,13 @@ import ru.surfstudio.android.core.mvi.impls.ui.reducer.BaseReducer
 import ru.surfstudio.android.core.mvi.ui.mapper.RequestMapper
 import ru.surfstudio.android.core.mvp.binding.rx.relation.mvp.Command
 import ru.surfstudio.android.core.mvp.binding.rx.relation.mvp.State
-import ru.surfstudio.android.core.mvp.binding.rx.request.data.RequestUi
 import ru.surfstudio.android.core.ui.provider.resource.ResourceProvider
 import ru.surfstudio.android.dagger.scope.PerScreen
-import ru.surfstudio.standard.domain.entity.Ipu
 import ru.surfstudio.standard.f_metrics.MetricsEvent.*
 import ru.surfstudio.standard.ui.mvi.mappers.RequestMappers
 import javax.inject.Inject
 
 internal data class MetricsState(
-    val ipuRequestUi: RequestUi<List<Ipu>> = RequestUi(),
     val metricsUiItems: List<MetricsUi> = emptyList()
 )
 
@@ -73,10 +70,7 @@ internal class MetricsReducer @Inject constructor(
             )
             MetricsUi(it, previousValue)
         }
-        return state.copy(
-            ipuRequestUi = request,
-            metricsUiItems = metricsUiItems
-        )
+        return state.copy(metricsUiItems = metricsUiItems)
     }
 
     private fun handleSendIpuRequestEvent(
