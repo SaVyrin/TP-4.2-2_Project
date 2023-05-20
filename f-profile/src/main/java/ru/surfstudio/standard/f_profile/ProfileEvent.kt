@@ -12,5 +12,9 @@ internal sealed class ProfileEvent : Event {
     data class Navigation(override var event: NavCommandsEvent = NavCommandsEvent()) : NavCommandsComposition, ProfileEvent()
     data class Lifecycle(override var stage: LifecycleStage) : ProfileEvent(), LifecycleEvent
 
+    sealed class Input : ProfileEvent() {
+        object LogoutClicked : Input()
+    }
+
     data class GotCurrentUser(val userInfo: UserInfo) : ProfileEvent()
 }

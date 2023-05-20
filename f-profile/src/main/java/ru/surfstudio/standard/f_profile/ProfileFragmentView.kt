@@ -12,6 +12,7 @@ import ru.surfstudio.android.easyadapter.EasyAdapter
 import ru.surfstudio.android.easyadapter.ItemList
 import ru.surfstudio.android.recycler.decorator.Decorator
 import ru.surfstudio.android.recycler.decorator.MasterDecorator
+import ru.surfstudio.standard.f_profile.ProfileEvent.*
 import ru.surfstudio.standard.f_profile.controller.UserInfoController
 import ru.surfstudio.standard.f_profile.controller.UserStatisticsController
 import ru.surfstudio.standard.f_profile.databinding.FragmentProfileBinding
@@ -51,10 +52,14 @@ internal class ProfileFragmentView : BaseMviFragmentView<ProfileState, ProfileEv
     }
 
     override fun initViews() {
-        with(binding.profileRv) {
-            adapter = easyAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-            addItemDecoration(buildDecoration())
+        with(binding) {
+            profileLogoutBtn.setOnClickListener { Input.LogoutClicked.emit() }
+
+            with(profileRv) {
+                adapter = easyAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+                addItemDecoration(buildDecoration())
+            }
         }
     }
 
