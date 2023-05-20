@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 internal data class MetricsState(
     val ipuRequestUi: RequestUi<List<Ipu>> = RequestUi(),
-    val metricsUiItems: List<Ipu> = emptyList()
+    val metricsUiItems: List<MetricsUi> = emptyList()
 )
 
 /**
@@ -28,6 +28,7 @@ internal class MetricsScreenStateHolder @Inject constructor(
 @PerScreen
 internal class IpuCommandHolder @Inject constructor() {
     val errorMessage = Command<String>()
+    val ipuSendSuccess = Command<String>()
 }
 
 /**
@@ -43,12 +44,16 @@ internal class MetricsReducer @Inject constructor(
     override fun reduce(state: MetricsState, event: MetricsEvent): MetricsState {
         return when (event) {
             is CurrentIpuRequestEvent -> handleIpuRequestEvent(state, event)
+            is SendIpuRequestEvent -> handleSendIpuRequestEvent(state, event)
             is Input.IpuChanged -> handleIpuChanged(state, event)
             else -> state
         }
     }
 
-    private fun handleIpuRequestEvent(state: MetricsState, event: CurrentIpuRequestEvent): MetricsState {
+    private fun handleIpuRequestEvent(
+        state: MetricsState,
+        event: CurrentIpuRequestEvent
+    ): MetricsState {
         val request = RequestMapper.builder(event.request)
             .mapData(RequestMappers.data.default())
             .mapLoading(RequestMappers.loading.simple())
@@ -61,16 +66,45 @@ internal class MetricsReducer @Inject constructor(
             .build()
 
         val ipu = request.data ?: emptyList()
+        val metricsUiItems = ipu.map {
+            val previousValue = resourceProvider.getString(
+                R.string.metrics_previous_text,
+                it.value
+            )
+            MetricsUi(it, previousValue)
+        }
         return state.copy(
             ipuRequestUi = request,
-            metricsUiItems = ipu
+            metricsUiItems = metricsUiItems
         )
+    }
+
+    private fun handleSendIpuRequestEvent(
+        state: MetricsState,
+        event: SendIpuRequestEvent
+    ): MetricsState {
+        val request = RequestMapper.builder(event.request)
+            .handleError(RequestMappers.error.noInternet(errorHandler))
+            .handleError { _, _, _ ->
+                val message = resourceProvider.getString(R.string.default_error_message)
+                ch.errorMessage.accept(message)
+                true
+            }
+            .build()
+
+        val isLoading = event.isLoading
+        val isSuccess = event.isSuccess
+        if (isSuccess) {
+            val successMessage = resourceProvider.getString(R.string.metrics_send_success_text)
+            ch.ipuSendSuccess.accept(successMessage)
+        }
+        return state
     }
 
     private fun handleIpuChanged(state: MetricsState, event: Input.IpuChanged): MetricsState {
         val metricsUiItems = state.metricsUiItems.map {
-            if (it.id == event.ipu.id) {
-                event.ipu
+            if (it.ipu.id == event.metricsUi.ipu.id) {
+                MetricsUi(event.metricsUi.ipu, it.previousValue)
             } else {
                 it
             }

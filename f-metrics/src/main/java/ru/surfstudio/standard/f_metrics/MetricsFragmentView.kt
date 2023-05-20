@@ -55,6 +55,7 @@ internal class MetricsFragmentView : BaseMviFragmentView<MetricsState, MetricsEv
             with(metricsRv) {
                 adapter = easyAdapter
                 layoutManager = LinearLayoutManager(context)
+                itemAnimator = null
             }
         }
     }
@@ -64,10 +65,11 @@ internal class MetricsFragmentView : BaseMviFragmentView<MetricsState, MetricsEv
     }
 
     private fun initCommands() {
-        ch.errorMessage bindTo ::showMessage
+        ch.errorMessage bindTo { showMessage(it, R.color.colorAccent) }
+        ch.ipuSendSuccess bindTo ::showMessage
     }
 
-    private fun showMessage(message: String) {
-        messageController.show(message)
+    private fun showMessage(message: String, colorRes: Int? = null) {
+        messageController.show(message, colorRes)
     }
 }

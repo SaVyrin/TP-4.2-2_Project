@@ -16,7 +16,7 @@ internal sealed class MetricsEvent : Event {
 
     sealed class Input : MetricsEvent() {
         object SendIpuClicked : Input()
-        data class IpuChanged(val ipu: Ipu) : Input()
+        data class IpuChanged(val metricsUi: MetricsUi) : Input()
     }
 
     data class CurrentIpuRequestEvent(override val request: Request<List<Ipu>>) : RequestEvent<List<Ipu>>, MetricsEvent()
