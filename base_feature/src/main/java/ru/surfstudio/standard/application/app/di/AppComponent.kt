@@ -4,6 +4,7 @@ import dagger.Component
 import ru.surfstudio.android.dagger.scope.PerApplication
 import ru.surfstudio.standard.i_network.generated.di.AuthModule
 import ru.surfstudio.standard.application.cache.di.CacheModule
+import ru.surfstudio.standard.application.ipu.di.IpuModule
 import ru.surfstudio.standard.application.migration.di.MigrationModule
 import ru.surfstudio.standard.application.network.di.EtagModule
 import ru.surfstudio.standard.application.network.di.NetworkModule
@@ -21,6 +22,7 @@ import ru.surfstudio.standard.ui.navigation.di.NavigationModule
     MigrationModule::class,
     SharedPrefModule::class,
     AuthModule::class,
+    IpuModule::class,
     UserModule::class,
     CacheModule::class,
     EtagModule::class,

@@ -41,7 +41,8 @@
     <string name="metrics_cold_water_text">Холодная вода</string>
     <string name="metrics_hot_water_text">Горячая вода</string>
     <string name="metrics_send_btn">Передать показания</string>
-    <string name="metrics_previous_text">Пред. показания: %d</string>
+    <string name="metrics_previous_text">Пред. показания: %s</string>
+    <string name="metrics_send_success_text">Показания переданы успешно</string>
 
     <!-- Pay -->
     <string name="pay_title_text">Оплата услуг</string>
