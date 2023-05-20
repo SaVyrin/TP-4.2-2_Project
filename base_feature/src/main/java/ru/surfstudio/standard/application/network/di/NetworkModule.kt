@@ -20,6 +20,7 @@ import ru.surfstudio.standard.i_network.generated.urls.ServerUrls.BASE_API_URL
 import ru.surfstudio.standard.i_network.generated.urls.ServerUrls.TEST_API_URL
 import ru.surfstudio.standard.i_network.network.BaseUrl
 import ru.surfstudio.standard.i_network.network.CallAdapterFactory
+import ru.surfstudio.standard.i_network.network.NullOnEmptyConverterFactory
 import ru.surfstudio.standard.i_network.network.calladapter.BaseCallAdapterFactory
 
 @Module
@@ -40,6 +41,7 @@ class NetworkModule {
         return Retrofit.Builder()
                 .client(okHttpClient)
                 .baseUrl(apiUrl.toString())
+                .addConverterFactory(NullOnEmptyConverterFactory())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(callAdapterFactory)
                 .build()
