@@ -4,4 +4,6 @@ apply from: '../commonKaptModule.gradle'
 dependencies {
     implementation project(":base_feature")
     implementation project(":i-network")
+    implementation project(":i-ipu")
+    implementation project(":i-user")
 }
