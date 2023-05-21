@@ -11,7 +11,7 @@ import ru.surfstudio.android.core.ui.navigation.feature.route.feature.CrossFeatu
 import ru.surfstudio.android.core.ui.view_binding.viewBinding
 import ru.surfstudio.android.easyadapter.EasyAdapter
 import ru.surfstudio.android.easyadapter.ItemList
-import ru.surfstudio.standard.f_pay.PayEvent.*
+import ru.surfstudio.standard.f_pay.PayEvent.Input
 import ru.surfstudio.standard.f_pay.controller.PayController
 import ru.surfstudio.standard.f_pay.controller.SummaryController
 import ru.surfstudio.standard.f_pay.databinding.FragmentPayBinding
@@ -68,7 +68,15 @@ internal class PayFragmentView : BaseMviFragmentView<PayState, PayEvent>(), Cros
     }
 
     override fun render(state: PayState) {
-        binding.payNextPeriodTv.performIfChanged(state.expectedPaymentText, TextView::setText)
+        with(binding) {
+            payNextPeriodTv.performIfChanged(state.expectedPaymentText, TextView::setText)
+            paySendBtn.performIfChanged(state.canPay) { canPay ->
+                visibility = if (!canPay) View.INVISIBLE else View.VISIBLE
+            }
+            paySendDisabledBtn.performIfChanged(state.canPay) { canPay ->
+                visibility = if (canPay) View.INVISIBLE else View.VISIBLE
+            }
+        }
 
         ItemList.create().apply {
             addAll(state.payUiItems, payController)
