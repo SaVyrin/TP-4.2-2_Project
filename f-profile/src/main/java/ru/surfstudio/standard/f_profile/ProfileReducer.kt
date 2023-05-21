@@ -61,9 +61,9 @@ internal class ProfileReducer @Inject constructor(
     private fun handleGetStatistics(state: ProfileState, event: Lifecycle): ProfileState {
         val chartData = generatePieData(
             listOf(
-                Payment("Горячая вода", 300F),
-                Payment("Холодная вода", 350F),
-                Payment("Свет", 600F),
+                Payment("Горячая вода", 300),
+                Payment("Холодная вода", 350),
+                Payment("Свет", 600),
             )
         )
         val screenItems = state.screenItems.map { screenItem ->
@@ -77,7 +77,7 @@ internal class ProfileReducer @Inject constructor(
     }
 
     private fun generatePieData(payments: List<Payment>): PieData {
-        val pieEntries = payments.map { PieEntry(it.value, it.type) }
+        val pieEntries = payments.map { PieEntry(it.value.toFloat(), it.type) }
 
         val pieDataSet = PieDataSet(pieEntries, "").apply {
             colors = ColorTemplate.COLORFUL_COLORS.toList()

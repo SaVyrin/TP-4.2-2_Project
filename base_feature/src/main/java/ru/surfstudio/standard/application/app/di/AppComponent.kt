@@ -12,6 +12,7 @@ import ru.surfstudio.standard.application.network.di.OkHttpModule
 import ru.surfstudio.standard.application.notification.FcmModule
 import ru.surfstudio.standard.application.notification.MessagingService
 import ru.surfstudio.standard.application.notification.NotificationModule
+import ru.surfstudio.standard.application.pay.di.PayModule
 import ru.surfstudio.standard.application.storage.di.SharedPrefModule
 import ru.surfstudio.standard.application.user.di.UserModule
 import ru.surfstudio.standard.ui.navigation.di.NavigationModule
@@ -23,6 +24,7 @@ import ru.surfstudio.standard.ui.navigation.di.NavigationModule
     SharedPrefModule::class,
     AuthModule::class,
     IpuModule::class,
+    PayModule::class,
     UserModule::class,
     CacheModule::class,
     EtagModule::class,

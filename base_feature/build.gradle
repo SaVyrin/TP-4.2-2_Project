@@ -19,6 +19,7 @@ dependencies {
     implementation project(":i-token")
     implementation project(":i-user")
     implementation project(":i-ipu")
+    implementation project(":i-pay")
     implementation project(":i-initialization")
     implementation project(":i-session")
 
