@@ -52,6 +52,7 @@
     <string name="pay_summary_text">Итого к оплате: %dр.</string>
     <string name="pay_next_period_text">Прогноз на следующий месяц: %dр.</string>
     <string name="pay_btn">Оплатить</string>
+    <string name="pay_success_text">Оплата проведена успешно</string>
 
     <!-- Profile -->
     <string name="profile_title_text">Личный кабинет</string>

@@ -10,6 +10,10 @@
         <item name="shapeAppearanceOverlay">@style/ButtonShapeAppearance</item>
     </style>
 
+    <style name="Button.Gray">
+        <item name="backgroundTint">@color/darker_gray</item>
+    </style>
+
     <style name="ButtonShapeAppearance">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>

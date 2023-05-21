@@ -47,4 +47,16 @@
         android:text="@string/pay_btn"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/pay_send_disabled_btn"
+        style="@style/Button.Gray"
+        android:enabled="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:paddingVertical="8dp"
+        android:text="@string/pay_btn"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
