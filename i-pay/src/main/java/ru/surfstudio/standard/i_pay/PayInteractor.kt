@@ -25,7 +25,9 @@ class PayInteractor @Inject constructor(
     fun getPayments(personalAccount: String): Single<List<Payment>> {
         return payRepository.getPayments(personalAccount).doOnSuccess { lastPayments ->
             lastPayments?.let {
-                paymentsStorage.lastPayments = LastPayments(lastPayments)
+                if (lastPayments.any { it.value > 0 }) {
+                    paymentsStorage.lastPayments = LastPayments(lastPayments)
+                }
             }
         }
     }
