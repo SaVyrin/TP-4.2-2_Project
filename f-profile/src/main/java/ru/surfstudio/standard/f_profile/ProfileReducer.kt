@@ -15,8 +15,8 @@ import ru.surfstudio.standard.f_profile.ProfileEvent.GotCurrentUser
 import ru.surfstudio.standard.f_profile.ProfileEvent.GotStatistics
 import ru.surfstudio.standard.f_profile.ui.ProfileUi
 import ru.surfstudio.standard.f_profile.ui.UserInfoUiCreator
+import ru.surfstudio.standard.ui.util.toPx
 import javax.inject.Inject
-
 
 internal data class ProfileState(
     val screenItems: List<ProfileUi> = emptyList(),
@@ -61,7 +61,7 @@ internal class ProfileReducer @Inject constructor(
 
     private fun handleGetStatistics(state: ProfileState, event: GotStatistics): ProfileState {
         val payments = event.payments.filter { it.value > 0 }
-        val chartData = generatePieData(payments)
+        val chartData = generatePieData(payments, state)
         val showingChart = payments.isNotEmpty()
         val screenItems = state.screenItems.map { screenItem ->
             if (screenItem is ProfileUi.UserStatisticsUi) {
