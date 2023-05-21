@@ -58,6 +58,7 @@ internal class ProfileFragmentView : BaseMviFragmentView<ProfileState, ProfileEv
             with(profileRv) {
                 adapter = easyAdapter
                 layoutManager = LinearLayoutManager(requireContext())
+                itemAnimator = null
                 addItemDecoration(buildDecoration())
             }
         }
