@@ -20,6 +20,7 @@ import ru.surfstudio.standard.i_initialization.InitializeAppInteractor
 import ru.surfstudio.standard.i_ipu.IpuInteractor
 import ru.surfstudio.standard.i_pay.PayInteractor
 import ru.surfstudio.standard.i_onboarding.OnBoardingStorage
+import ru.surfstudio.standard.i_pay.PaymentsStorage
 import ru.surfstudio.standard.i_push_notification.storage.FcmStorage
 import ru.surfstudio.standard.i_session.SessionChangedInteractor
 import ru.surfstudio.standard.i_user.UserStorage
@@ -56,6 +57,7 @@ interface AppProxyDependencies {
 
     fun onBoardingStorage(): OnBoardingStorage
     fun userStorage(): UserStorage
+    fun paymentsStorage(): PaymentsStorage
 
     fun authInteractor(): AuthInteractor
     fun ipuInteractor(): IpuInteractor

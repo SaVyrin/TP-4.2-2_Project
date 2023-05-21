@@ -1,6 +1,8 @@
 package ru.surfstudio.standard.f_profile.controller
 
+import android.graphics.Color
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import ru.surfstudio.android.easyadapter.controller.BindableItemController
 import ru.surfstudio.android.easyadapter.holder.BindableViewHolder
 import ru.surfstudio.standard.f_profile.R
@@ -32,7 +34,15 @@ class UserStatisticsController() :
         }
 
         override fun bind(data: UserStatisticsUi) {
-            binding.profilePieChart.data = data.chartData
+            with(binding) {
+                profileStatisticsUnavailableTv.isVisible = !data.showingChart
+
+                with(profilePieChart) {
+                    setEntryLabelColor(Color.BLACK)
+                    this.data = data.chartData
+                    isVisible = data.showingChart
+                }
+            }
         }
     }
 }

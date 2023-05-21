@@ -52,6 +52,7 @@
     <string name="pay_summary_text">Итого к оплате: %dр.</string>
     <string name="pay_next_period_text">Прогноз на следующий месяц: %dр.</string>
     <string name="pay_btn">Оплатить</string>
+    <string name="pay_success_text">Оплата проведена успешно</string>
 
     <!-- Profile -->
     <string name="profile_title_text">Личный кабинет</string>
@@ -60,5 +61,6 @@
     <string name="profile_surname_text">Фамилия</string>
     <string name="profile_address_text">Адрес</string>
     <string name="profile_logout_btn">Выйти</string>
+    <string name="profile_statistics_unavailable_text">Статистика пока не доступна</string>
 
 </resources>

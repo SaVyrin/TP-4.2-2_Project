@@ -11,10 +11,10 @@ import ru.surfstudio.android.core.mvp.binding.rx.relation.mvp.State
 import ru.surfstudio.android.dagger.scope.PerScreen
 import ru.surfstudio.standard.domain.entity.Payment
 import ru.surfstudio.standard.domain.entity.UserInfo
-import ru.surfstudio.standard.f_profile.ProfileEvent.*
+import ru.surfstudio.standard.f_profile.ProfileEvent.GotCurrentUser
+import ru.surfstudio.standard.f_profile.ProfileEvent.GotStatistics
 import ru.surfstudio.standard.f_profile.ui.ProfileUi
 import ru.surfstudio.standard.f_profile.ui.UserInfoUiCreator
-import ru.surfstudio.standard.ui.util.toPx
 import javax.inject.Inject
 
 
@@ -53,24 +53,19 @@ internal class ProfileReducer @Inject constructor(
 
     override fun reduce(state: ProfileState, event: ProfileEvent): ProfileState {
         return when (event) {
-            is Lifecycle -> handleGetStatistics(state, event)
+            is GotStatistics -> handleGetStatistics(state, event)
             is GotCurrentUser -> handleGotCurrentUser(state, event)
             else -> state
         }
     }
 
-    private fun handleGetStatistics(state: ProfileState, event: Lifecycle): ProfileState {
-        val chartData = generatePieData(
-            listOf(
-                Payment("Горячая вода", 300),
-                Payment("Холодная вода", 350),
-                Payment("Свет", 600),
-            ),
-            state
-        )
+    private fun handleGetStatistics(state: ProfileState, event: GotStatistics): ProfileState {
+        val payments = event.payments.filter { it.value > 0 }
+        val chartData = generatePieData(payments)
+        val showingChart = payments.isNotEmpty()
         val screenItems = state.screenItems.map { screenItem ->
             if (screenItem is ProfileUi.UserStatisticsUi) {
-                screenItem.copy(chartData)
+                screenItem.copy(chartData, showingChart)
             } else {
                 screenItem
             }
@@ -88,7 +83,7 @@ internal class ProfileReducer @Inject constructor(
         val pieDataSet = PieDataSet(pieEntries, "").apply {
             colors = ColorTemplate.COLORFUL_COLORS.toList()
             sliceSpace = 2f
-            valueTextColor = Color.WHITE
+            valueTextColor = Color.BLACK
             valueTextSize = textSize
         }
         return PieData(pieDataSet)
