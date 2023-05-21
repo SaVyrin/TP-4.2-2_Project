@@ -19,7 +19,8 @@ import javax.inject.Inject
 
 
 internal data class ProfileState(
-    val screenItems: List<ProfileUi> = emptyList()
+    val screenItems: List<ProfileUi> = emptyList(),
+    val isFirstLoad: Boolean = true
 )
 
 /**
@@ -64,7 +65,8 @@ internal class ProfileReducer @Inject constructor(
                 Payment("Горячая вода", 300),
                 Payment("Холодная вода", 350),
                 Payment("Свет", 600),
-            )
+            ),
+            state
         )
         val screenItems = state.screenItems.map { screenItem ->
             if (screenItem is ProfileUi.UserStatisticsUi) {
@@ -73,17 +75,21 @@ internal class ProfileReducer @Inject constructor(
                 screenItem
             }
         }
-        return state.copy(screenItems = screenItems)
+        return state.copy(
+            screenItems = screenItems,
+            isFirstLoad = false
+        )
     }
 
-    private fun generatePieData(payments: List<Payment>): PieData {
+    private fun generatePieData(payments: List<Payment>, state: ProfileState): PieData {
         val pieEntries = payments.map { PieEntry(it.value.toFloat(), it.type) }
 
+        val textSize = if (state.isFirstLoad) 16.toPx.toFloat() else 16.toFloat()
         val pieDataSet = PieDataSet(pieEntries, "").apply {
             colors = ColorTemplate.COLORFUL_COLORS.toList()
             sliceSpace = 2f
             valueTextColor = Color.WHITE
-            valueTextSize = 16.toPx.toFloat()
+            valueTextSize = textSize
         }
         return PieData(pieDataSet)
     }
