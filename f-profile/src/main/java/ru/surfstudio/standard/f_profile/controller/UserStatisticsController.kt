@@ -3,6 +3,7 @@ package ru.surfstudio.standard.f_profile.controller
 import android.graphics.Color
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import com.github.mikephil.charting.components.Legend
 import ru.surfstudio.android.easyadapter.controller.BindableItemController
 import ru.surfstudio.android.easyadapter.holder.BindableViewHolder
 import ru.surfstudio.standard.f_profile.R
@@ -38,9 +39,11 @@ class UserStatisticsController() :
                 profileStatisticsUnavailableTv.isVisible = !data.showingChart
 
                 with(profilePieChart) {
+                    description.isEnabled = false
                     setEntryLabelColor(Color.BLACK)
                     this.data = data.chartData
                     isVisible = data.showingChart
+                    legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
                 }
             }
         }
