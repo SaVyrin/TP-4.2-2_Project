@@ -14,9 +14,14 @@ import javax.inject.Inject
 
 internal data class PayState(
     val payUiItems: List<PayUi> = emptyList(),
+    val paymentSummary: Int = 0,
     val paymentSummaryText: String = EMPTY_STRING,
     val expectedPaymentText: String = EMPTY_STRING
-)
+) {
+
+    val canPay: Boolean
+        get() = paymentSummary > 0
+}
 
 /**
  * State Holder [PayFragmentView]
@@ -46,6 +51,7 @@ internal class PayReducer @Inject constructor(
             is GetCurrentIpuRequestEvent -> handleGetCurrentIpuRequestEvent(state, event)
             is GetPaymentsRequestEvent -> handleGetPaymentsRequestEvent(state, event)
             is GetExpectedPaymentRequestEvent -> handleGetExpectedPaymentRequestEvent(state, event)
+            is PayRequestEvent -> handlePayRequestEvent(state, event)
             else -> state
         }
     }
@@ -92,15 +98,11 @@ internal class PayReducer @Inject constructor(
             val payment = payments.find { payment ->
                 payment.type == payUi.ipu.type
             }
-            if (payment != null) {
-                val payAmount = resourceProvider.getString(
-                    R.string.pay_single_metric_text,
-                    payment.value
-                )
-                payUi.copy(payAmount = payAmount)
-            } else {
-                payUi
-            }
+            val payAmount = resourceProvider.getString(
+                R.string.pay_single_metric_text,
+                payment?.value ?: 0
+            )
+            payUi.copy(payAmount = payAmount)
         }
         val paymentSummary = payments.sumOf { it.value }
         val paymentSummaryText = resourceProvider.getString(
@@ -109,6 +111,7 @@ internal class PayReducer @Inject constructor(
         )
         return state.copy(
             payUiItems = payUiItems,
+            paymentSummary = paymentSummary,
             paymentSummaryText = paymentSummaryText
         )
     }
@@ -137,5 +140,26 @@ internal class PayReducer @Inject constructor(
             EMPTY_STRING
         }
         return state.copy(expectedPaymentText = expectedPaymentText)
+    }
+
+    private fun handlePayRequestEvent(
+        state: PayState,
+        event: PayRequestEvent
+    ): PayState {
+        RequestMapper.builder(event.request)
+            .handleError(RequestMappers.error.noInternet(errorHandler))
+            .handleError { _, _, _ ->
+                val message = resourceProvider.getString(R.string.default_error_message)
+                ch.errorMessage.accept(message)
+                true
+            }
+            .build()
+
+        val isSuccess = event.isSuccess
+        if (isSuccess) {
+            val successMessage = resourceProvider.getString(R.string.pay_success_text)
+            ch.paySuccess.accept(successMessage)
+        }
+        return state
     }
 }
