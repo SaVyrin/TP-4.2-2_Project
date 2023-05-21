@@ -13,7 +13,8 @@ sealed class ProfileUi {
     ) : ProfileUi()
 
     data class UserStatisticsUi(
-        val chartData: PieData = PieData()
+        val chartData: PieData = PieData(),
+        val showingChart: Boolean = true
     ) : ProfileUi()
 }
 

@@ -5,5 +5,6 @@ dependencies {
     implementation project(":base_feature")
     implementation project(":i-network")
     implementation project(":i-user")
+    implementation project(":i-pay")
     implementation view.charts
 }
