@@ -60,5 +60,6 @@
     <string name="profile_surname_text">Фамилия</string>
     <string name="profile_address_text">Адрес</string>
     <string name="profile_logout_btn">Выйти</string>
+    <string name="profile_statistics_unavailable_text">Статистика пока не доступна</string>
 
 </resources>

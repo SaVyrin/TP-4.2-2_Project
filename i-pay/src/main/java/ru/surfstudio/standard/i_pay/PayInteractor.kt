@@ -7,6 +7,7 @@ import ru.surfstudio.android.connection.ConnectionProvider
 import ru.surfstudio.android.dagger.scope.PerApplication
 import ru.surfstudio.standard.domain.entity.Payment
 import ru.surfstudio.standard.i_network.network.BaseNetworkInteractor
+import ru.surfstudio.standard.i_pay.entity.LastPayments
 import javax.inject.Inject
 
 /**
@@ -16,12 +17,17 @@ import javax.inject.Inject
 @SuppressLint("CheckResult")
 class PayInteractor @Inject constructor(
     connectionQualityProvider: ConnectionProvider,
-    private val payRepository: PayRepository
+    private val payRepository: PayRepository,
+    private val paymentsStorage: PaymentsStorage
 ) : BaseNetworkInteractor(connectionQualityProvider) {
 
 
     fun getPayments(personalAccount: String): Single<List<Payment>> {
-        return payRepository.getPayments(personalAccount)
+        return payRepository.getPayments(personalAccount).doOnSuccess { lastPayments ->
+            lastPayments?.let {
+                paymentsStorage.lastPayments = LastPayments(lastPayments)
+            }
+        }
     }
 
     fun getExpectedPayment(personalAccount: String): Single<Int> {
