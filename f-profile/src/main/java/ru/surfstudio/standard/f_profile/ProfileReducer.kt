@@ -31,14 +31,7 @@ internal class ProfileScreenStateHolder @Inject constructor(
     userInfoUiCreator: UserInfoUiCreator
 ) : State<ProfileState>(
     ProfileState(
-        screenItems = userInfoUiCreator.createUserInfoItems(
-            UserInfo(
-                id = 12312,
-                name = "Дмитрий",
-                surname = "Дмитриев",
-                address = "г. Челябинск, ул. Комарова, д. 9, кв. 42"
-            )
-        )
+        screenItems = userInfoUiCreator.createUserInfoItems(UserInfo.EMPTY_USER)
     )
 )
 
