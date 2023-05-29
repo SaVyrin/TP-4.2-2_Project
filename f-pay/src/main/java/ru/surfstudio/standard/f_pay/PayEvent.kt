@@ -16,6 +16,7 @@ internal sealed class PayEvent : Event {
     data class Lifecycle(override var stage: LifecycleStage) : PayEvent(), LifecycleEvent
 
     sealed class Input : PayEvent() {
+        object Retry : Input()
         object PayClicked : Input()
     }
 
