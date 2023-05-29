@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.surfstudio.android.core.mvi.impls.event.hub.ScreenEventHub
 import ru.surfstudio.android.core.ui.navigation.feature.route.feature.CrossFeatureFragment
@@ -14,6 +15,7 @@ import ru.surfstudio.standard.f_metrics.controller.IpuController
 import ru.surfstudio.standard.f_metrics.databinding.FragmentMetricsBinding
 import ru.surfstudio.standard.f_metrics.di.MetricsScreenConfigurator
 import ru.surfstudio.standard.ui.mvi.view.BaseMviFragmentView
+import ru.surfstudio.standard.ui.util.performIfChanged
 import ru.surfstudio.standard.v_message_controller_top.IconMessageController
 import javax.inject.Inject
 
@@ -51,6 +53,7 @@ internal class MetricsFragmentView : BaseMviFragmentView<MetricsState, MetricsEv
         initCommands()
         with(binding) {
             metricsSendBtn.setOnClickListener { Input.SendIpuClicked.emit() }
+            metricsErrorLayout.errorLoadStateBtn.setOnClickListener { Input.Retry.emit() }
 
             with(metricsRv) {
                 adapter = easyAdapter
@@ -62,6 +65,14 @@ internal class MetricsFragmentView : BaseMviFragmentView<MetricsState, MetricsEv
 
     override fun render(state: MetricsState) {
         easyAdapter.setData(state.metricsUiItems, ipuController)
+
+        with(binding) {
+            metricsRv.performIfChanged(state.showLoading) { isVisible = !it }
+            metricsPb.performIfChanged(state.showLoading) { isVisible = it }
+
+            metricsRv.performIfChanged(state.showError) { isVisible = !it }
+            metricsErrorLayout.root.performIfChanged(state.showError) { isVisible = it }
+        }
     }
 
     private fun initCommands() {

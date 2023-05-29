@@ -10,8 +10,9 @@
     <string name="no_internet_connection_error_message">Не удалось загрузить данные. Проверьте соединение с интернетом и попробуйте еще раз</string>
     <string name="bad_response_error_message">Произошла ошибка загрузки данных на экране. Попробуйте позже еще раз</string>
     <string name="unexpected_error_error_message">Непредвиденная ошибка</string>
-    <string name="common_error_message">Произошла ошибка загрузки данных,\nпопробуйте обновить экран позже</string>
+    <string name="common_error_message">Произошла ошибка загрузки данных,\nпопробуйте обновить экран позже.</string>
     <string name="default_error_message">Что-то пошло не так. Повторите попытку позже</string>
+    <string name="error_load_text">Не удалось загрузить данные</string>
     <string name="pagination_footer_text">Загрузить еще</string>
 
     <string name="state_empty_text">Ничего не найдено</string>

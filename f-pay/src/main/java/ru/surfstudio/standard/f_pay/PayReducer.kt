@@ -5,15 +5,18 @@ import ru.surfstudio.android.core.mvi.impls.ui.reducer.BaseReducer
 import ru.surfstudio.android.core.mvi.ui.mapper.RequestMapper
 import ru.surfstudio.android.core.mvp.binding.rx.relation.mvp.Command
 import ru.surfstudio.android.core.mvp.binding.rx.relation.mvp.State
+import ru.surfstudio.android.core.mvp.binding.rx.request.data.RequestUi
 import ru.surfstudio.android.core.ui.provider.resource.ResourceProvider
 import ru.surfstudio.android.dagger.scope.PerScreen
 import ru.surfstudio.android.utilktx.ktx.text.EMPTY_STRING
+import ru.surfstudio.standard.domain.entity.Ipu
 import ru.surfstudio.standard.f_pay.PayEvent.*
 import ru.surfstudio.standard.ui.mvi.mappers.RequestMappers
 import javax.inject.Inject
 
 internal data class PayState(
     val payUiItems: List<PayUi> = emptyList(),
+    val ipuRequest: RequestUi<List<Ipu>> = RequestUi(),
     val paymentSummary: Int = 0,
     val paymentSummaryText: String = EMPTY_STRING,
     val expectedPaymentText: String = EMPTY_STRING
@@ -21,6 +24,12 @@ internal data class PayState(
 
     val canPay: Boolean
         get() = paymentSummary > 0
+
+    val showLoading: Boolean
+        get() = payUiItems.isEmpty() && ipuRequest.isLoading
+
+    val showError: Boolean
+        get() = payUiItems.isEmpty() && ipuRequest.hasError
 }
 
 /**
@@ -71,11 +80,20 @@ internal class PayReducer @Inject constructor(
             }
             .build()
 
-        val ipu = request.data ?: emptyList()
-        val payUiItems = ipu.map {
-            PayUi(it, "")
+        request.data?.let { ipu ->
+            val payUiItems = ipu.map { item ->
+                val savedIpu = state.payUiItems.find {
+                    it.ipu.id == item.id
+                }
+                val savedPayAmount = savedIpu?.payAmount ?: ""
+                PayUi(item, savedPayAmount)
+            }
+            return state.copy(
+                ipuRequest = request,
+                payUiItems = payUiItems
+            )
         }
-        return state.copy(payUiItems = payUiItems)
+        return state.copy(ipuRequest = request)
     }
 
     private fun handleGetPaymentsRequestEvent(
@@ -93,27 +111,29 @@ internal class PayReducer @Inject constructor(
             }
             .build()
 
-        val payments = request.data ?: emptyList()
-        val payUiItems = state.payUiItems.map { payUi ->
-            val payment = payments.find { payment ->
-                payment.type == payUi.ipu.type
+        request.data?.let { payments ->
+            val payUiItems = state.payUiItems.map { payUi ->
+                val payment = payments.find { payment ->
+                    payment.type == payUi.ipu.type
+                }
+                val payAmount = resourceProvider.getString(
+                    R.string.pay_single_metric_text,
+                    payment?.value ?: 0
+                )
+                payUi.copy(payAmount = payAmount)
             }
-            val payAmount = resourceProvider.getString(
-                R.string.pay_single_metric_text,
-                payment?.value ?: 0
+            val paymentSummary = payments.sumOf { it.value }
+            val paymentSummaryText = resourceProvider.getString(
+                R.string.pay_summary_text,
+                paymentSummary
             )
-            payUi.copy(payAmount = payAmount)
+            return state.copy(
+                payUiItems = payUiItems,
+                paymentSummary = paymentSummary,
+                paymentSummaryText = paymentSummaryText
+            )
         }
-        val paymentSummary = payments.sumOf { it.value }
-        val paymentSummaryText = resourceProvider.getString(
-            R.string.pay_summary_text,
-            paymentSummary
-        )
-        return state.copy(
-            payUiItems = payUiItems,
-            paymentSummary = paymentSummary,
-            paymentSummaryText = paymentSummaryText
-        )
+        return state
     }
 
     private fun handleGetExpectedPaymentRequestEvent(
@@ -131,15 +151,14 @@ internal class PayReducer @Inject constructor(
             }
             .build()
 
-        val expectedPaymentText = if (request.data != null) {
-            resourceProvider.getString(
+        request.data?.let { expectedValue ->
+            val expectedPaymentText = resourceProvider.getString(
                 R.string.pay_next_period_text,
-                request.data ?: 0
+                expectedValue
             )
-        } else {
-            EMPTY_STRING
+            return state.copy(expectedPaymentText = expectedPaymentText)
         }
-        return state.copy(expectedPaymentText = expectedPaymentText)
+        return state
     }
 
     private fun handlePayRequestEvent(

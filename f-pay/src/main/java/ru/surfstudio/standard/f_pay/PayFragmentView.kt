@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.surfstudio.android.core.mvi.impls.event.hub.ScreenEventHub
 import ru.surfstudio.android.core.ui.navigation.feature.route.feature.CrossFeatureFragment
@@ -58,6 +59,7 @@ internal class PayFragmentView : BaseMviFragmentView<PayState, PayEvent>(), Cros
         with(binding) {
             initCommands()
             paySendBtn.setOnClickListener { Input.PayClicked.emit() }
+            payErrorLayout.errorLoadStateBtn.setOnClickListener { Input.Retry.emit() }
 
             with(payRv) {
                 adapter = easyAdapter
@@ -76,6 +78,13 @@ internal class PayFragmentView : BaseMviFragmentView<PayState, PayEvent>(), Cros
             paySendDisabledBtn.performIfChanged(state.canPay) { canPay ->
                 visibility = if (canPay) View.INVISIBLE else View.VISIBLE
             }
+
+            payRv.performIfChanged(state.showLoading) { isVisible = !it }
+            payPb.performIfChanged(state.showLoading) { isVisible = it }
+
+
+            payRv.performIfChanged(state.showError) { isVisible = !it }
+            payErrorLayout.root.performIfChanged(state.showError) { isVisible = it }
         }
 
         ItemList.create().apply {

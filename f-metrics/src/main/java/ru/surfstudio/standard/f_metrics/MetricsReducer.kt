@@ -5,15 +5,25 @@ import ru.surfstudio.android.core.mvi.impls.ui.reducer.BaseReducer
 import ru.surfstudio.android.core.mvi.ui.mapper.RequestMapper
 import ru.surfstudio.android.core.mvp.binding.rx.relation.mvp.Command
 import ru.surfstudio.android.core.mvp.binding.rx.relation.mvp.State
+import ru.surfstudio.android.core.mvp.binding.rx.request.data.RequestUi
 import ru.surfstudio.android.core.ui.provider.resource.ResourceProvider
 import ru.surfstudio.android.dagger.scope.PerScreen
+import ru.surfstudio.standard.domain.entity.Ipu
 import ru.surfstudio.standard.f_metrics.MetricsEvent.*
 import ru.surfstudio.standard.ui.mvi.mappers.RequestMappers
 import javax.inject.Inject
 
 internal data class MetricsState(
-    val metricsUiItems: List<MetricsUi> = emptyList()
-)
+    val metricsUiItems: List<MetricsUi> = emptyList(),
+    val ipuRequest: RequestUi<List<Ipu>> = RequestUi()
+) {
+
+    val showLoading: Boolean
+        get() = metricsUiItems.isEmpty() && ipuRequest.isLoading
+
+    val showError: Boolean
+        get() = metricsUiItems.isEmpty() && ipuRequest.hasError
+}
 
 /**
  * State Holder [MetricsFragmentView]
@@ -62,15 +72,20 @@ internal class MetricsReducer @Inject constructor(
             }
             .build()
 
-        val ipu = request.data ?: emptyList()
-        val metricsUiItems = ipu.map {
-            val previousValue = resourceProvider.getString(
-                R.string.metrics_previous_text,
-                it.value
+        request.data?.let { ipu ->
+            val metricsUiItems = ipu.map {
+                val previousValue = resourceProvider.getString(
+                    R.string.metrics_previous_text,
+                    it.value
+                )
+                MetricsUi(it, previousValue)
+            }
+            return state.copy(
+                ipuRequest = request,
+                metricsUiItems = metricsUiItems
             )
-            MetricsUi(it, previousValue)
         }
-        return state.copy(metricsUiItems = metricsUiItems)
+        return state.copy(ipuRequest = request)
     }
 
     private fun handleSendIpuRequestEvent(

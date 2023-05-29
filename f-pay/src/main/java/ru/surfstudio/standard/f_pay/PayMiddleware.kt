@@ -28,6 +28,7 @@ internal class PayMiddleware @Inject constructor(
                 Navigation::class decomposeTo navigationMiddleware,
                 GetCurrentIpuRequestEvent::class filter { it.isSuccess } eventMap { getPayments() },
                 PayRequestEvent::class filter { it.isSuccess } eventMap { getPayments() },
+                Input.Retry::class eventMapTo { getCurrentIpu() },
                 Input.PayClicked::class eventMapTo { handlePayClicked() }
             )
         }

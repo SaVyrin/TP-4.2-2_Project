@@ -20,6 +20,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <include
+            android:id="@+id/metrics_error_layout"
+            layout="@layout/layout_state_error"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="48dp"
+            app:layout_constraintBottom_toTopOf="@id/metrics_send_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/metrics_screen_title_tv" />
+
+        <ProgressBar
+            android:id="@+id/metrics_pb"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintBottom_toTopOf="@id/metrics_send_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/metrics_screen_title_tv" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/metrics_rv"
             android:layout_width="0dp"

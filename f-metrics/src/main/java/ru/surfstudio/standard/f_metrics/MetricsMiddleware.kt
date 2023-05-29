@@ -25,13 +25,14 @@ internal class MetricsMiddleware @Inject constructor(
     override fun transform(eventStream: Observable<MetricsEvent>): Observable<out MetricsEvent> =
         transformations(eventStream) {
             addAll(
-                onCreate() eventMap { handleOnCreate() },
+                onCreate() eventMap { getCurrentIpu() },
                 Navigation::class decomposeTo navigationMiddleware,
+                Input.Retry::class eventMapTo { getCurrentIpu() },
                 Input.SendIpuClicked::class eventMapTo { handleSendIpuClicked() }
             )
         }
 
-    private fun handleOnCreate(): Observable<out CurrentIpuRequestEvent> {
+    private fun getCurrentIpu(): Observable<out CurrentIpuRequestEvent> {
         val user = userStorage.currentUser ?: UserInfo.EMPTY_USER
         return ipuInteractor.getCurrentIpu(user.id.toString())
             .io()
