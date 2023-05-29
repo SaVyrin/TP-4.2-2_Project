@@ -21,7 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="48dp"
-        app:layout_constraintBottom_toTopOf="@id/pay_next_period_tv"
+        app:layout_constraintBottom_toTopOf="@id/pay_send_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pay_screen_title_tv" />
