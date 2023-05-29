@@ -22,7 +22,7 @@ internal data class MetricsState(
         get() = metricsUiItems.isEmpty() && ipuRequest.isLoading
 
     val showError: Boolean
-        get() = metricsUiItems.isEmpty() && ipuRequest.hasError
+        get() = !showLoading && ipuRequest.hasError
 
     val canSendIpu: Boolean
         get() = metricsUiItems.isNotEmpty()
