@@ -14,6 +14,7 @@ internal sealed class MetricsEvent : Event {
     data class Lifecycle(override var stage: LifecycleStage) : MetricsEvent(), LifecycleEvent
 
     sealed class Input : MetricsEvent() {
+        object Retry : Input()
         object SendIpuClicked : Input()
         data class IpuChanged(val metricsUi: MetricsUi) : Input()
     }

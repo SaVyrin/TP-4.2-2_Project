@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/error_load_state_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/error_load_text"
+        android:textAppearance="@style/Text.Bold.16" />
+
+    <TextView
         android:id="@+id/error_load_state_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Text.Regular.14"
-        tools:text="@string/state_error_message" />
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/common_error_message"
+        android:textAppearance="@style/Text.Regular.14" />
 
     <Button
         android:id="@+id/error_load_state_btn"
+        style="@style/Button.Red"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/state_error_btn" />
+
 </LinearLayout>
