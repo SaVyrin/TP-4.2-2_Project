@@ -13,7 +13,11 @@ import javax.inject.Inject
 
 internal data class MetricsState(
     val metricsUiItems: List<MetricsUi> = emptyList()
-)
+) {
+
+    val canSendIpu: Boolean
+        get() = metricsUiItems.isNotEmpty()
+}
 
 /**
  * State Holder [MetricsFragmentView]

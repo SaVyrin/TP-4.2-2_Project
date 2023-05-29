@@ -14,6 +14,7 @@ import ru.surfstudio.standard.f_metrics.controller.IpuController
 import ru.surfstudio.standard.f_metrics.databinding.FragmentMetricsBinding
 import ru.surfstudio.standard.f_metrics.di.MetricsScreenConfigurator
 import ru.surfstudio.standard.ui.mvi.view.BaseMviFragmentView
+import ru.surfstudio.standard.ui.util.performIfChanged
 import ru.surfstudio.standard.v_message_controller_top.IconMessageController
 import javax.inject.Inject
 
@@ -62,6 +63,14 @@ internal class MetricsFragmentView : BaseMviFragmentView<MetricsState, MetricsEv
 
     override fun render(state: MetricsState) {
         easyAdapter.setData(state.metricsUiItems, ipuController)
+        with(binding) {
+            metricsSendBtn.performIfChanged(state.canSendIpu) { canSendIpu ->
+                visibility = if (!canSendIpu) View.INVISIBLE else View.VISIBLE
+            }
+            metricsSendDisabledBtn.performIfChanged(state.canSendIpu) { canSendIpu ->
+                visibility = if (canSendIpu) View.INVISIBLE else View.VISIBLE
+            }
+        }
     }
 
     private fun initCommands() {
