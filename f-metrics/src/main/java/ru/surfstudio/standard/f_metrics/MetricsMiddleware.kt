@@ -1,5 +1,9 @@
 package ru.surfstudio.standard.f_metrics
 
+import android.os.Bundle
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import io.reactivex.Observable
 import ru.surfstudio.android.core.mvi.impls.ui.middleware.BaseMiddleware
 import ru.surfstudio.android.core.mvi.impls.ui.middleware.BaseMiddlewareDependency
@@ -40,6 +44,8 @@ internal class MetricsMiddleware @Inject constructor(
     }
 
     private fun handleSendIpuClicked(): Observable<out MetricsEvent> {
+        if (!state.isValid) return skip()
+
         val ipu = state.metricsUiItems.map { it.ipu }
         return ipuInteractor.sendIpu(ipu)
             .io()

@@ -40,7 +40,7 @@ class IpuController(
                     }
                 }
                 metricsTitleTv.text = data.ipu.type
-                metricsPreviousValueTv.text = data.previousValue
+                metricsPreviousValueTv.text = data.previousValueString
             }
         }
     }
