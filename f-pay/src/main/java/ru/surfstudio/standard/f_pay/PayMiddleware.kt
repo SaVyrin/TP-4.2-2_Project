@@ -1,5 +1,9 @@
 package ru.surfstudio.standard.f_pay
 
+import android.os.Bundle
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import io.reactivex.Observable
 import ru.surfstudio.android.core.mvi.impls.ui.middleware.BaseMiddleware
 import ru.surfstudio.android.core.mvi.impls.ui.middleware.BaseMiddlewareDependency
@@ -20,6 +24,8 @@ internal class PayMiddleware @Inject constructor(
     private val payInteractor: PayInteractor,
     private val userStorage: UserStorage
 ) : BaseMiddleware<PayEvent>(basePresenterDependency) {
+
+    private var firebaseAnalytics: FirebaseAnalytics = Firebase.analytics
 
     override fun transform(eventStream: Observable<PayEvent>): Observable<out PayEvent> =
         transformations(eventStream) {
@@ -58,5 +64,11 @@ internal class PayMiddleware @Inject constructor(
         return payInteractor.pay(user.id.toString())
             .io()
             .asRequestEvent(::PayRequestEvent)
+            .doOnComplete {
+                val bundle = Bundle().apply {
+                    putString("user_id", user.id.toString())
+                }
+                firebaseAnalytics.logEvent("pay", bundle)
+            }
     }
 }
