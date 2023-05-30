@@ -1,9 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-//apply plugin: 'com.google.gms.google-services' todo uncoment for real app
-//apply plugin: 'com.google.firebase.crashlytics' todo uncoment for real app
-//apply plugin: 'com.google.firebase.appdistribution' todo uncoment for real app
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.firebase.appdistribution'
 
 apply from: '../config.gradle'
 
