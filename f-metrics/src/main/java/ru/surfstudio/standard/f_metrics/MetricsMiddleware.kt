@@ -45,6 +45,8 @@ internal class MetricsMiddleware @Inject constructor(
     }
 
     private fun handleSendIpuClicked(): Observable<out MetricsEvent> {
+        if (!state.isValid) return skip()
+
         val ipu = state.metricsUiItems.map { it.ipu }
         return ipuInteractor.sendIpu(ipu)
             .io()
