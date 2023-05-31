@@ -1,5 +1,8 @@
 package ru.surfstudio.standard.f_pay
 
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfig
 import ru.surfstudio.android.core.mvi.impls.ui.reactor.BaseReactorDependency
 import ru.surfstudio.android.core.mvi.impls.ui.reducer.BaseReducer
 import ru.surfstudio.android.core.mvi.ui.mapper.RequestMapper
@@ -54,6 +57,8 @@ internal class PayReducer @Inject constructor(
     private val resourceProvider: ResourceProvider,
     private val ch: PayCommandHolder
 ) : BaseReducer<PayEvent, PayState>(dependency) {
+
+    private val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
 
     override fun reduce(state: PayState, event: PayEvent): PayState {
         return when (event) {
@@ -152,10 +157,18 @@ internal class PayReducer @Inject constructor(
             .build()
 
         request.data?.let { expectedValue ->
-            val expectedPaymentText = resourceProvider.getString(
-                R.string.pay_next_period_text,
-                expectedValue
-            )
+            val showExpected = remoteConfig.all.entries.find { entry ->
+                entry.key == "show_expected_payment"
+            }?.value?.asBoolean() ?: true
+
+            val expectedPaymentText = if (showExpected) {
+                resourceProvider.getString(
+                    R.string.pay_next_period_text,
+                    expectedValue
+                )
+            } else {
+                resourceProvider.getString(R.string.pay_next_period_unavailable_text)
+            }
             return state.copy(expectedPaymentText = expectedPaymentText)
         }
         return state

@@ -5,6 +5,9 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfig
 import ru.surfstudio.android.core.mvi.impls.ui.reactor.BaseReactorDependency
 import ru.surfstudio.android.core.mvi.impls.ui.reducer.BaseReducer
 import ru.surfstudio.android.core.mvp.binding.rx.relation.mvp.State
@@ -44,6 +47,8 @@ internal class ProfileReducer @Inject constructor(
     private val userInfoUiCreator: UserInfoUiCreator
 ) : BaseReducer<ProfileEvent, ProfileState>(dependency) {
 
+    private val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+
     override fun reduce(state: ProfileState, event: ProfileEvent): ProfileState {
         return when (event) {
             is GotStatistics -> handleGetStatistics(state, event)
@@ -70,7 +75,15 @@ internal class ProfileReducer @Inject constructor(
     }
 
     private fun generatePieData(payments: List<Payment>, state: ProfileState): PieData {
-        val pieEntries = payments.map { PieEntry(it.value.toFloat(), it.type) }
+        val showStatistics = remoteConfig.all.entries.find { entry ->
+            entry.key == "show_user_statistics"
+        }?.value?.asBoolean() ?: true
+
+        val pieEntries = if (showStatistics) {
+            payments.map { PieEntry(it.value.toFloat(), it.type) }
+        } else {
+            emptyList()
+        }
 
         val textSize = if (state.isFirstLoad) 16.toPx.toFloat() else 16.toFloat()
         val pieDataSet = PieDataSet(pieEntries, "").apply {

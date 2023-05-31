@@ -53,6 +53,7 @@
     <string name="pay_single_metric_text">К оплате: %dр.</string>
     <string name="pay_summary_text">Итого к оплате: %dр.</string>
     <string name="pay_next_period_text">Прогноз на следующий месяц: %dр.</string>
+    <string name="pay_next_period_unavailable_text">Прогноз пока недоступен</string>
     <string name="pay_btn">Оплатить</string>
     <string name="pay_success_text">Оплата проведена успешно</string>
 

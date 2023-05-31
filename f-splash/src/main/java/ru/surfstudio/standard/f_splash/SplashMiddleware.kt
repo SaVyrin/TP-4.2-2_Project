@@ -1,5 +1,8 @@
 package ru.surfstudio.standard.f_splash
 
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfig
 import io.reactivex.Completable
 import io.reactivex.Observable
 import ru.surfstudio.android.core.mvi.impls.ui.middleware.BaseMiddleware
@@ -33,13 +36,21 @@ class SplashMiddleware @Inject constructor(
     private val onBoardingStorage: OnBoardingStorage
 ) : BaseMiddleware<SplashEvent>(baseMiddlewareDependency) {
 
+    private val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+
     override fun transform(eventStream: Observable<SplashEvent>) =
         transformations(eventStream) {
             addAll(
+                onCreate() react { fetchRemoteConfig() },
                 Navigation::class decomposeTo navigationMiddleware,
                 mergeInitDelay().map { openNextScreen() }
             )
         }
+
+    private fun fetchRemoteConfig() {
+        remoteConfig.fetch(0)
+        remoteConfig.activate()
+    }
 
     private fun mergeInitDelay(): Observable<String> {
         val transitionDelay = if (SdkUtils.isAtLeastS()) {
@@ -56,8 +67,9 @@ class SplashMiddleware @Inject constructor(
     }
 
     private fun openNextScreen(): SplashEvent {
+        val showOnboarding = remoteConfig.all.entries.find { entry -> entry.key == "show_onboarding" }?.value?.asBoolean() ?: true
         return Navigation().replace(
-            if (onBoardingStorage.shouldShowOnBoardingScreen)
+            if (onBoardingStorage.shouldShowOnBoardingScreen && showOnboarding)
                 OnboardingActivityRoute()
             else
                 MainActivityRoute()

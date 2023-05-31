@@ -86,10 +86,11 @@ ext {
     ]
 
     firebase = [
-            bom        : "com.google.firebase:firebase-bom:${versions.firebaseBom}",
-            messaging  : "com.google.firebase:firebase-messaging",
-            analytics  : "com.google.firebase:firebase-analytics-ktx",
-            crashlytics: "com.google.firebase:firebase-crashlytics"
+            bom         : "com.google.firebase:firebase-bom:${versions.firebaseBom}",
+            messaging   : "com.google.firebase:firebase-messaging",
+            remoteConfig: "com.google.firebase:firebase-config-ktx",
+            analytics   : "com.google.firebase:firebase-analytics-ktx",
+            crashlytics : "com.google.firebase:firebase-crashlytics"
     ]
 
     okHttp = [
