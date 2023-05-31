@@ -29,7 +29,7 @@ internal data class PayState(
         get() = payUiItems.isEmpty() && ipuRequest.isLoading
 
     val showError: Boolean
-        get() = payUiItems.isEmpty() && ipuRequest.hasError
+        get() = !showLoading && ipuRequest.hasError
 }
 
 /**

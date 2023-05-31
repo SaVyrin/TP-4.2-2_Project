@@ -65,8 +65,14 @@ internal class MetricsFragmentView : BaseMviFragmentView<MetricsState, MetricsEv
 
     override fun render(state: MetricsState) {
         easyAdapter.setData(state.metricsUiItems, ipuController)
-
         with(binding) {
+            metricsSendBtn.performIfChanged(state.canSendIpu) { canSendIpu ->
+                visibility = if (!canSendIpu) View.INVISIBLE else View.VISIBLE
+            }
+            metricsSendDisabledBtn.performIfChanged(state.canSendIpu) { canSendIpu ->
+                visibility = if (canSendIpu) View.INVISIBLE else View.VISIBLE
+            }
+
             metricsRv.performIfChanged(state.showLoading) { isVisible = !it }
             metricsPb.performIfChanged(state.showLoading) { isVisible = it }
 

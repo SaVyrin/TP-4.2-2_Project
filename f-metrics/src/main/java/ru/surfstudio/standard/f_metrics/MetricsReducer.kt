@@ -15,14 +15,17 @@ import javax.inject.Inject
 
 internal data class MetricsState(
     val metricsUiItems: List<MetricsUi> = emptyList(),
-    val ipuRequest: RequestUi<List<Ipu>> = RequestUi(),
+    val ipuRequest: RequestUi<List<Ipu>> = RequestUi()
 ) {
 
     val showLoading: Boolean
         get() = metricsUiItems.isEmpty() && ipuRequest.isLoading
 
     val showError: Boolean
-        get() = metricsUiItems.isEmpty() && ipuRequest.hasError
+        get() = !showLoading && ipuRequest.hasError
+
+    val canSendIpu: Boolean
+        get() = metricsUiItems.isNotEmpty()
 
     val isValid: Boolean
         get() = metricsUiItems.all { it.ipu.value.toInt() >= it.previousValue }
