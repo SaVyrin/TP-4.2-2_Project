@@ -1,5 +1,9 @@
 package ru.surfstudio.standard.f_profile
 
+import android.os.Bundle
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import io.reactivex.Observable
 import ru.surfstudio.android.core.mvi.impls.ui.middleware.BaseMiddleware
 import ru.surfstudio.android.core.mvi.impls.ui.middleware.BaseMiddlewareDependency
@@ -25,6 +29,8 @@ internal class ProfileMiddleware @Inject constructor(
     private val paymentsStorage: PaymentsStorage
 ) : BaseMiddleware<ProfileEvent>(basePresenterDependency) {
 
+    private var firebaseAnalytics: FirebaseAnalytics = Firebase.analytics
+
     override fun transform(eventStream: Observable<ProfileEvent>): Observable<out ProfileEvent> =
         transformations(eventStream) {
             addAll(
@@ -47,6 +53,12 @@ internal class ProfileMiddleware @Inject constructor(
     }
 
     private fun handleLogout(): Navigation {
+        val user = userStorage.currentUser ?: UserInfo.EMPTY_USER
+        val bundle = Bundle().apply {
+            putString("user_id", user.id.toString())
+        }
+        firebaseAnalytics.logEvent("logout", bundle)
+
         userStorage.currentUser = UserInfo.EMPTY_USER
         return Navigation().replaceHard(
             route = AuthFragmentRoute(),
