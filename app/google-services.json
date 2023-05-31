@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "546611935255",
+    "project_id": "myipu-7bd17",
+    "storage_bucket": "myipu-7bd17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546611935255:android:c5cb6626990187b0784452",
+        "android_client_info": {
+          "package_name": "ru.surfstudio.android.myipu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq9nyL3nzX3I7kkkx41YegJI4dSvG3BwQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

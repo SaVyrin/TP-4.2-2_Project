@@ -26,6 +26,9 @@ internal data class MetricsState(
 
     val canSendIpu: Boolean
         get() = metricsUiItems.isNotEmpty()
+
+    val isValid: Boolean
+        get() = metricsUiItems.all { it.ipu.value.toInt() >= it.previousValue }
 }
 
 /**
@@ -38,6 +41,7 @@ internal class MetricsScreenStateHolder @Inject constructor(
 @PerScreen
 internal class IpuCommandHolder @Inject constructor() {
     val errorMessage = Command<String>()
+    val invalidIndications = Command<String>()
     val ipuSendSuccess = Command<String>()
 }
 
@@ -56,6 +60,7 @@ internal class MetricsReducer @Inject constructor(
             is CurrentIpuRequestEvent -> handleIpuRequestEvent(state, event)
             is SendIpuRequestEvent -> handleSendIpuRequestEvent(state, event)
             is Input.IpuChanged -> handleIpuChanged(state, event)
+            is Input.SendIpuClicked -> handleSendIpuClicked(state)
             else -> state
         }
     }
@@ -81,7 +86,7 @@ internal class MetricsReducer @Inject constructor(
                     R.string.metrics_previous_text,
                     it.value
                 )
-                MetricsUi(it, previousValue)
+                MetricsUi(it, it.value.toInt(), previousValue)
             }
             return state.copy(
                 ipuRequest = request,
@@ -113,7 +118,7 @@ internal class MetricsReducer @Inject constructor(
                     R.string.metrics_previous_text,
                     it.ipu.value
                 )
-                it.copy(previousValue = previousValue)
+                it.copy(previousValueString = previousValue)
             }
             return state.copy(metricsUiItems = metricsItems)
         }
@@ -123,11 +128,19 @@ internal class MetricsReducer @Inject constructor(
     private fun handleIpuChanged(state: MetricsState, event: Input.IpuChanged): MetricsState {
         val metricsUiItems = state.metricsUiItems.map {
             if (it.ipu.id == event.metricsUi.ipu.id) {
-                MetricsUi(event.metricsUi.ipu, it.previousValue)
+                MetricsUi(event.metricsUi.ipu, it.previousValue, it.previousValueString)
             } else {
                 it
             }
         }
         return state.copy(metricsUiItems = metricsUiItems)
+    }
+
+    private fun handleSendIpuClicked(state: MetricsState): MetricsState {
+        if (!state.isValid) {
+            val message = resourceProvider.getString(R.string.metrics_incorrect_error)
+            ch.invalidIndications.accept(message)
+        }
+        return state
     }
 }

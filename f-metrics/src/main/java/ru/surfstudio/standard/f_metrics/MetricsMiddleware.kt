@@ -1,5 +1,9 @@
 package ru.surfstudio.standard.f_metrics
 
+import android.os.Bundle
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import io.reactivex.Observable
 import ru.surfstudio.android.core.mvi.impls.ui.middleware.BaseMiddleware
 import ru.surfstudio.android.core.mvi.impls.ui.middleware.BaseMiddlewareDependency
@@ -21,6 +25,7 @@ internal class MetricsMiddleware @Inject constructor(
 ) : BaseMiddleware<MetricsEvent>(basePresenterDependency) {
 
     private val state: MetricsState get() = sh.value
+    private var firebaseAnalytics: FirebaseAnalytics = Firebase.analytics
 
     override fun transform(eventStream: Observable<MetricsEvent>): Observable<out MetricsEvent> =
         transformations(eventStream) {
@@ -40,9 +45,18 @@ internal class MetricsMiddleware @Inject constructor(
     }
 
     private fun handleSendIpuClicked(): Observable<out MetricsEvent> {
+        if (!state.isValid) return skip()
+
         val ipu = state.metricsUiItems.map { it.ipu }
         return ipuInteractor.sendIpu(ipu)
             .io()
             .asRequestEvent(::SendIpuRequestEvent)
+            .doOnComplete {
+                val user = userStorage.currentUser ?: UserInfo.EMPTY_USER
+                val bundle = Bundle().apply {
+                    putString("user_id", user.id.toString())
+                }
+                firebaseAnalytics.logEvent("send_ipu", bundle)
+            }
     }
 }

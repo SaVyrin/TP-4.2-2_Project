@@ -44,6 +44,7 @@
     <string name="metrics_send_btn">Передать показания</string>
     <string name="metrics_previous_text">Пред. показания: %s</string>
     <string name="metrics_send_success_text">Показания переданы успешно</string>
+    <string name="metrics_incorrect_error">Введены некорректные показания</string>
 
     <!-- Pay -->
     <string name="pay_title_text">Оплата услуг</string>
