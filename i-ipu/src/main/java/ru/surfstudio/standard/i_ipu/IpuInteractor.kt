@@ -20,7 +20,7 @@ class IpuInteractor @Inject constructor(
 ) : BaseNetworkInteractor(connectionQualityProvider) {
 
     fun getCurrentIpu(personalAccount: String): Single<List<Ipu>> {
-        return ipuRepository.getCurrentIpu(personalAccount)
+        return ipuRepository.getCurrentIpu(personalAccount).map { list -> list.sortedBy { it.id } }
     }
 
     fun sendIpu(ipu: List<Ipu>): Completable {
