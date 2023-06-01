@@ -60,7 +60,12 @@ internal class ProfileReducer @Inject constructor(
     private fun handleGetStatistics(state: ProfileState, event: GotStatistics): ProfileState {
         val payments = event.payments.filter { it.value > 0 }
         val chartData = generatePieData(payments, state)
-        val showingChart = payments.isNotEmpty()
+
+        val showStatistics = remoteConfig.all.entries.find { entry ->
+            entry.key == "show_user_statistics"
+        }?.value?.asBoolean() ?: true
+
+        val showingChart = payments.isNotEmpty() && showStatistics
         val screenItems = state.screenItems.map { screenItem ->
             if (screenItem is ProfileUi.UserStatisticsUi) {
                 screenItem.copy(chartData, showingChart)
@@ -75,16 +80,7 @@ internal class ProfileReducer @Inject constructor(
     }
 
     private fun generatePieData(payments: List<Payment>, state: ProfileState): PieData {
-        val showStatistics = remoteConfig.all.entries.find { entry ->
-            entry.key == "show_user_statistics"
-        }?.value?.asBoolean() ?: true
-
-        val pieEntries = if (showStatistics) {
-            payments.map { PieEntry(it.value.toFloat(), it.type) }
-        } else {
-            emptyList()
-        }
-
+        val pieEntries = payments.map { PieEntry(it.value.toFloat(), it.type) }
         val textSize = if (state.isFirstLoad) 16.toPx.toFloat() else 16.toFloat()
         val pieDataSet = PieDataSet(pieEntries, "").apply {
             colors = ColorTemplate.COLORFUL_COLORS.toList()
