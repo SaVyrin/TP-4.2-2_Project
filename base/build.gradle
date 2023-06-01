@@ -5,6 +5,7 @@ dependencies {
     api project(":domain")
     api platform(firebase.bom)
     api firebase.analytics
+    api firebase.remoteConfig
     api firebase.messaging
 
     api view.glide
