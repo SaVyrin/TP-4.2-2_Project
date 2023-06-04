@@ -7,6 +7,7 @@
 - [Figma](https://www.figma.com/file/uxAj0Pw7A0JOESFNfWjsIK/Приборы-учёта?node-id=0-1&t=gdfUlA6PfHoF9yzZ-0)
 - [Swagger](https://app.swaggerhub.com/apis/Sad-Programmist/My_IPU/0.0.1)
 - [Макет приложения](https://www.figma.com/file/uxAj0Pw7A0JOESFNfWjsIK/%D0%9F%D1%80%D0%B8%D0%B1%D0%BE%D1%80%D1%8B-%D1%83%D1%87%D1%91%D1%82%D0%B0?node-id=202-501&t=KYaTf4F57IGA399A-0)
+- [Apk файл приложения](https://drive.google.com/file/d/1FbNlg-1EI2GChbyOM5X6V7dj-7a7KCsZ/view?usp=sharing)
 
 ## Документация:
 #### ТЗ
@@ -23,6 +24,25 @@
 
 #### Видео
 [Видеопрезентация ТЗ](https://youtu.be/4Kp7Ps3ViUQ)
+
+## Инструкция по запуску
+Скачать [apk](https://drive.google.com/file/d/1FbNlg-1EI2GChbyOM5X6V7dj-7a7KCsZ/view?usp=sharing) файл и установить приложение.
+
+**Для авторизации использовать:**
+
+Логин - 12345<br>
+Пароль - password
+
+## Аналитика
+**Для входа в гугл аккаунт использовать:**
+
+Логин - tp4.2.2.team@gmail.com<br>
+Пароль - Qwerty123456. (С точкой)
+
+**Ссылки:**
+- [Firebase](https://console.firebase.google.com/u/3/project/myipu-7bd17/analytics/app/android:ru.surfstudio.android.myipu/overview/~2F?t=1685896382541&fpn=546611935255&swu=1&sgu=1&cs=app.m.dashboard.overview&g=1)
+- [Воронки](https://analytics.google.com/analytics/web/?authuser=3#/analysis/p379148218/edit/x9lp4C9gQDS2iAWC6o5aiw)
+
 
 ## Описание проекта
 Мои ИПУ - приложение для сбора показаний индивидуальных приборов учёта и начисления платы за потреблённые коммунальные услуги.
