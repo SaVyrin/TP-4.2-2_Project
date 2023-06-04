@@ -18,12 +18,24 @@
 [Курсовая работа.docx](https://github.com/SaVyrin/TP-4.2-2_Project/blob/main/Документация/Курсовая%20работа.docx)  
 [Курсовая работа.pdf](https://github.com/SaVyrin/TP-4.2-2_Project/blob/main/Документация/Курсовая%20работа.pdf)
 
+#### Сопроводительное письмо
+[Сопроводительное письмо](https://docs.google.com/document/d/1ksuVu9HdMfiJhayG2DiQHfiSBZJu_xGxf4vhXEx-mjw/edit?usp=sharing)
+
 #### Презентации
 [Презентация ТЗ](https://docs.google.com/presentation/d/1POKBrI35Oqe0zNZTVWDHLonTr2zM5QHpYX3OPz8PKY4/edit?usp=sharing)  
-[Презентация](https://docs.google.com/presentation/d/1el1Um21tT7_Jjjh4tu9cmuyj-m8GoCTY/edit?usp=sharing&ouid=106559586937516125709&rtpof=true&sd=true)
+[Презентация проекта](https://docs.google.com/presentation/d/1el1Um21tT7_Jjjh4tu9cmuyj-m8GoCTY/edit?usp=sharing&ouid=106559586937516125709&rtpof=true&sd=true)
+
+#### Отчет по ролям
+[Отчет по ролям.docx](https://github.com/SaVyrin/TP-4.2-2_Project/blob/main/Документация/Отчет%20по%20ролям.docx)  
+[Отчет по ролям.pdf](https://github.com/SaVyrin/TP-4.2-2_Project/blob/main/Документация/Отчет%20по%20ролям.pdf)
 
 #### Видео
-[Видеопрезентация ТЗ](https://youtu.be/4Kp7Ps3ViUQ)
+[Видеопрезентация ТЗ](https://youtu.be/4Kp7Ps3ViUQ)  
+[Обзор клиентской части](https://youtu.be/31AhDD2EhW8)  
+[Обзор серверной части](https://youtu.be/nxoNLN0WvmI)  
+[Обзор процесса развертывания проекта](https://youtu.be/aNy_Pfrk0zc)  
+[Пример работы приложения](https://youtube.com/shorts/coctMNF0nRg)  
+[Видео с презентацией проекта](https://youtu.be/Uqc1S1ZnlHc)  
 
 ## Инструкция по запуску
 Скачать [apk](https://drive.google.com/file/d/1FbNlg-1EI2GChbyOM5X6V7dj-7a7KCsZ/view?usp=sharing) файл и установить приложение.
@@ -41,7 +53,9 @@
 
 **Ссылки:**
 - [Firebase](https://console.firebase.google.com/u/3/project/myipu-7bd17/analytics/app/android:ru.surfstudio.android.myipu/overview/~2F?t=1685896382541&fpn=546611935255&swu=1&sgu=1&cs=app.m.dashboard.overview&g=1)
-- [Воронки](https://analytics.google.com/analytics/web/?authuser=3#/analysis/p379148218/edit/x9lp4C9gQDS2iAWC6o5aiw)
+- [Воронки](https://analytics.google.com/analytics/web/?authuser=3#/analysis/p379148218/edit/x9lp4C9gQDS2iAWC6o5aiw)  
+
+Скриншоты аналитической системы находятся в курсовой работе.
 
 
 ## Описание проекта
@@ -49,6 +63,7 @@
 
 ### Основные функции:
 - Передача показаний индивидуальных приборов учёта
+- Формирование платежей за потреблённые услуги
 - Оплата потреблённых коммунальных услуг
 - Отображение статистики потебдения коммунальных услуг
 
@@ -61,11 +76,11 @@
 
 **Солодовникова Яна:**
 - Скрам мастер
--  Разработка серверной части приложения
+- Разработка серверной части приложения
 
 ## Процесс разработки
 
-Разработка велась по методологии SCRUM, но доску слегка модифицировали с учетом специфики команды.
+Разработка велась по методологии SCRUM. Для визуализации процесса использовалась scrum доска с модификацией в виде добавления колонки "Rewiev" для обозначения статуса "соответствует критериям готовности и готово к демонстрации на обзоре".
 Синхронизировались на дейли - созванивались на 10-15 минут и обсуждали прогресс.<br>
 Владелец продукта приоритизировал бэклог. Скрам мастер отвечал за эффективность процессов работы.
 
